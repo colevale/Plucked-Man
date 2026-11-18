@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://dulu570oavmct"]
+
+[ext_resource type="Texture2D" uid="uid://d0bx8bmpbibyi" path="res://Art/Sprites/Placeholders/Pluckman Placeholder.png" id="1_k1cl8"]
+[ext_resource type="Script" uid="uid://rdt5rfuavd4u" path="res://Scripts/Testing/Projectile.gd" id="2_y0kec"]
+
+[node name="Projectile" type="Sprite2D" unique_id=2031095893]
+texture_filter = 1
+texture = ExtResource("1_k1cl8")
+script = ExtResource("2_y0kec")
+speed = 40.0

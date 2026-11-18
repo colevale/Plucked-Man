@@ -1,0 +1,44 @@
+[gd_scene format=3 uid="uid://cdyhsia10pkgv"]
+
+[ext_resource type="Script" uid="uid://c3wrns6wr5kdu" path="res://Scripts/Enemies/Flying Enemy.gd" id="1_v1upi"]
+[ext_resource type="Texture2D" uid="uid://uwl6xlu3eum3" path="res://Art/Sprites/Placeholders/Flying Enemy Placeholder.png" id="2_v1upi"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g4v7s"]
+size = Vector2(26, 14)
+
+[node name="Flying Enemy" type="RigidBody2D" unique_id=1226206699]
+gravity_scale = 0.0
+lock_rotation = true
+script = ExtResource("1_v1upi")
+attackSpeed = 50.0
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1271838719]
+texture_filter = 1
+texture = ExtResource("2_v1upi")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=6985070]
+shape = SubResource("RectangleShape2D_g4v7s")
+
+[node name="Search Indicator" type="Sprite2D" parent="." unique_id=322276839]
+modulate = Color(1, 0.23921569, 0.21568628, 0.44705883)
+texture_filter = 1
+position = Vector2(-100, 0)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_v1upi")
+
+[node name="Rays" type="Node2D" parent="." unique_id=1826683047]
+
+[node name="Right Ray" type="RayCast2D" parent="Rays" unique_id=323965433]
+target_position = Vector2(30, 0)
+
+[node name="Left Ray" type="RayCast2D" parent="Rays" unique_id=4394479]
+target_position = Vector2(-30, 0)
+
+[node name="Up Ray" type="RayCast2D" parent="Rays" unique_id=1456055438]
+target_position = Vector2(0, -25)
+
+[node name="Down Ray" type="RayCast2D" parent="Rays" unique_id=2070332006]
+target_position = Vector2(0, 40)
+
+[node name="Search Ray" type="RayCast2D" parent="Rays" unique_id=2012153237]
+target_position = Vector2(34, -30)

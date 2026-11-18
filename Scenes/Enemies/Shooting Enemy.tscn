@@ -1,0 +1,45 @@
+[gd_scene format=3 uid="uid://7s18matqsehh"]
+
+[ext_resource type="Script" uid="uid://5t0tj411jbi6" path="res://Scripts/Enemies/Shooting Enemy.gd" id="1_jqi0j"]
+[ext_resource type="Texture2D" uid="uid://dx81vjmoh7yy4" path="res://Art/Sprites/Placeholders/Ground Enemy Placeholder.png" id="2_rwdyd"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g4v7s"]
+size = Vector2(26, 25)
+
+[node name="Shooting Enemy" type="RigidBody2D" unique_id=1226206699]
+gravity_scale = 0.0
+lock_rotation = true
+script = ExtResource("1_jqi0j")
+projectileScene = "res://Scenes/Testing/Projectile.tscn"
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1271838719]
+self_modulate = Color(0.1254902, 0.10980392, 0.8039216, 1)
+texture_filter = 1
+texture = ExtResource("2_rwdyd")
+
+[node name="Search Indicator" type="Sprite2D" parent="." unique_id=613278645]
+self_modulate = Color(0.1254902, 0.9490196, 0.8039216, 0.5294118)
+texture_filter = 1
+position = Vector2(0, -58)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_rwdyd")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=6985070]
+position = Vector2(0, 2.5)
+shape = SubResource("RectangleShape2D_g4v7s")
+
+[node name="Rays" type="Node2D" parent="." unique_id=1910950354]
+
+[node name="Horizontal Ray" type="RayCast2D" parent="Rays" unique_id=323965433]
+target_position = Vector2(18, 0)
+
+[node name="Left Vertical Ray" type="RayCast2D" parent="Rays" unique_id=80795356]
+position = Vector2(-11, 0)
+target_position = Vector2(0, 17)
+
+[node name="Right Vertical Ray" type="RayCast2D" parent="Rays" unique_id=702740831]
+position = Vector2(11, 0)
+target_position = Vector2(0, 17)
+
+[node name="Search Ray" type="RayCast2D" parent="Rays" unique_id=1504582484]
+target_position = Vector2(0, -60)

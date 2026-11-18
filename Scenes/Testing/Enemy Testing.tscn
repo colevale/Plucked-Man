@@ -1,0 +1,67 @@
+[gd_scene format=3 uid="uid://dkiu0x42oub7s"]
+
+[ext_resource type="PackedScene" uid="uid://b3lhmvmw4qixk" path="res://Scenes/Enemies/Jumping Enemy.tscn" id="1_t8efy"]
+[ext_resource type="PackedScene" uid="uid://dvdoa4ffbr4of" path="res://Scenes/Testing/Box.tscn" id="2_pvio2"]
+[ext_resource type="PackedScene" uid="uid://cdyhsia10pkgv" path="res://Scenes/Enemies/Flying Enemy.tscn" id="3_tseap"]
+[ext_resource type="PackedScene" uid="uid://bfdvvj85hdu2i" path="res://Scenes/Testing/Player.tscn" id="4_q2mww"]
+[ext_resource type="PackedScene" uid="uid://da03ips773j03" path="res://Scenes/Enemies/Ceiling Grabber Enemy.tscn" id="5_fs0qc"]
+[ext_resource type="PackedScene" uid="uid://7s18matqsehh" path="res://Scenes/Enemies/Shooting Enemy.tscn" id="6_53l5r"]
+
+[node name="EnemyTesting" type="Node2D" unique_id=607693179]
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=487013643]
+zoom = Vector2(4, 4)
+
+[node name="Jumping Enemy" parent="." unique_id=1226206699 instance=ExtResource("1_t8efy")]
+position = Vector2(100, -11)
+mass = 0.1
+gravity_scale = 0.01
+walkSpeed = 20.0
+
+[node name="Box" parent="." unique_id=328725460 instance=ExtResource("2_pvio2")]
+position = Vector2(0, 39)
+
+[node name="Box6" parent="." unique_id=1584940170 instance=ExtResource("2_pvio2")]
+position = Vector2(-32, 39)
+
+[node name="Box3" parent="." unique_id=1653827206 instance=ExtResource("2_pvio2")]
+position = Vector2(32, 39)
+
+[node name="Box2" parent="." unique_id=1801872198 instance=ExtResource("2_pvio2")]
+position = Vector2(-87, -85)
+
+[node name="Box9" parent="." unique_id=1377665103 instance=ExtResource("2_pvio2")]
+position = Vector2(-119, -85)
+
+[node name="Box10" parent="." unique_id=803085485 instance=ExtResource("2_pvio2")]
+position = Vector2(-55, -85)
+
+[node name="Box4" parent="." unique_id=691507996 instance=ExtResource("2_pvio2")]
+position = Vector2(45, -71)
+
+[node name="Box8" parent="." unique_id=181297162 instance=ExtResource("2_pvio2")]
+position = Vector2(65, 62)
+
+[node name="Box5" parent="." unique_id=481976442 instance=ExtResource("2_pvio2")]
+position = Vector2(76, -45)
+
+[node name="Box7" parent="." unique_id=1644038858 instance=ExtResource("2_pvio2")]
+position = Vector2(100, 20)
+
+[node name="Flying Enemy" parent="." unique_id=1179070169 instance=ExtResource("3_tseap")]
+position = Vector2(72, 35)
+idleSpeed = 200.0
+attackSpeed = 80.0
+
+[node name="Player" parent="." unique_id=2059546600 instance=ExtResource("4_q2mww")]
+position = Vector2(-25, -34)
+
+[node name="Ceiling Enemy" parent="." unique_id=286744557 instance=ExtResource("5_fs0qc")]
+position = Vector2(-118, -54)
+attackSpeed = 1.0
+attackCooldownMax = 10.0
+
+[node name="Shooting Enemy" parent="." unique_id=1082487563 instance=ExtResource("6_53l5r")]
+position = Vector2(-6, 7)
+angleOffsetRad = 3.142
+attackCooldownMax = 2.0
