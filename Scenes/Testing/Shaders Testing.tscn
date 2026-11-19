@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://bhca0rw7nh827"]
+
+[ext_resource type="Shader" uid="uid://bwnwf4ovj11kg" path="res://Shaders/Searchlight.tres" id="1_4ylm4"]
+[ext_resource type="Texture2D" uid="uid://behig4ywdgxra" path="res://Art/Sprites/Tiles/Tile 1.png" id="2_1ewio"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_g4v7s"]
+shader = ExtResource("1_4ylm4")
+shader_parameter/Color = Color(0.113725, 1, 0.117647, 1)
+
+[node name="ShadersTesting" type="Node2D" unique_id=977568691]
+
+[node name="Searchlight" type="Sprite2D" parent="." unique_id=2069804361]
+material = SubResource("ShaderMaterial_g4v7s")
+scale = Vector2(3.880003, 0.52000034)
+texture = ExtResource("2_1ewio")

@@ -3,8 +3,18 @@
 [ext_resource type="Texture2D" uid="uid://d0bx8bmpbibyi" path="res://Art/Sprites/Placeholders/Pluckman Placeholder.png" id="1_k1cl8"]
 [ext_resource type="Script" uid="uid://rdt5rfuavd4u" path="res://Scripts/Testing/Projectile.gd" id="2_y0kec"]
 
-[node name="Projectile" type="Sprite2D" unique_id=2031095893]
+[sub_resource type="CircleShape2D" id="CircleShape2D_g4v7s"]
+radius = 14.035668
+
+[node name="Projectile" type="Area2D" unique_id=1940531558]
 texture_filter = 1
-texture = ExtResource("1_k1cl8")
 script = ExtResource("2_y0kec")
 speed = 40.0
+
+[node name="Sprite" type="Sprite2D" parent="." unique_id=1129957165]
+texture = ExtResource("1_k1cl8")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1038342843]
+shape = SubResource("CircleShape2D_g4v7s")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

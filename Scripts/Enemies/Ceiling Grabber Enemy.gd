@@ -8,12 +8,17 @@ var grabberBobAmplitude : float = 20
 
 var reelInMultiplier : float = 2
 
-var victim : Node2D
+var victim : Entity
+@export var trapAttackTimerMax : float = 0.5
+var trapAttackTimerCur : float
+
+@export var trapDamage : int = 1
 
 
 func _ready() -> void:
 	super._ready()
 	grabber = $Grabber
+	searchLight.rotation = PI/2
 	
 
 
@@ -22,7 +27,8 @@ func _move(delta : float) :
 
 func _scan(delta : float) :
 	super._scan(delta)
-	if !isAttacking && attackCooldownCur <= 0 && searchRay.is_colliding() && searchRay.get_collider().get("name") == "Player" :
+
+	if _hasValidTarget() :
 		_attack(searchRay.get_collider())
 		return
 	
@@ -32,6 +38,8 @@ func _scan(delta : float) :
 	var y : float = (searchRayBaseDir.y + sin(bobT) * grabberBobAmplitude) * grabT
 	searchRay.target_position.y = y
 	grabber.position.y = y
+	searchLight.scale.x = searchRay.target_position.length()/16
+	searchLight.scale.y = grabT
 	
 	
 func _attackMove(delta : float):
@@ -41,14 +49,27 @@ func _attackMove(delta : float):
 	var grabT : float = (attackCooldownCur/attackCooldownMax)	
 	
 	if grabT < 0.1 :
-		_endAttack()
+		trapAttackTimerCur -= delta
+		if trapAttackTimerCur < 0 :
+			trapAttackTimerCur = trapAttackTimerMax
+			if victim != null :
+				victim._updateHP(trapDamage)
+			else :
+				_endAttack()
 		return
+			
+			
+		#_endAttack()
+		#return
 	
 	
 	bobT += delta * grabberBobSpeed
 	var y : float = (searchRayBaseDir.y + sin(bobT) * grabberBobAmplitude) * grabT
 	searchRay.target_position.y = y
 	grabber.position.y = y
+	
+	searchLight.scale.x = searchRay.target_position.length()/16
+	searchLight.scale.y = grabT
 	
 	victim.global_position = grabber.global_position
 	
@@ -57,5 +78,12 @@ func _attack(node : Node2D):
 	super._attack(node)
 	victim = node
 	freeze = true
+	trapAttackTimerCur = trapAttackTimerMax
+	
+func _on_contact_hitbox_body_entered(body: Node2D) -> void:
+	if body == victim :
+		return
+	
+	super._on_contact_hitbox_body_entered(body)
 	
 	

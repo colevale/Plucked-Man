@@ -1,14 +1,16 @@
 [gd_scene format=3 uid="uid://bfdvvj85hdu2i"]
 
+[ext_resource type="Script" uid="uid://b6q4vvwm67mr6" path="res://Scripts/Testing/Entity.gd" id="1_px38w"]
 [ext_resource type="Texture2D" uid="uid://bce2yt2p4vqul" path="res://Art/Sprites/Placeholders/Player Placeholder.png" id="1_rpqav"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g4v7s"]
 size = Vector2(32, 32)
 
-[node name="Player" type="RigidBody2D" unique_id=328725460]
+[node name="Player" type="RigidBody2D" unique_id=328725460 groups=["Player"]]
 gravity_scale = 0.0
 lock_rotation = true
 freeze = true
+script = ExtResource("1_px38w")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1858793900]
 texture_filter = 1

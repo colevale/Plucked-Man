@@ -12,12 +12,6 @@
 [node name="Camera2D" type="Camera2D" parent="." unique_id=487013643]
 zoom = Vector2(4, 4)
 
-[node name="Jumping Enemy" parent="." unique_id=1226206699 instance=ExtResource("1_t8efy")]
-position = Vector2(100, -11)
-mass = 0.1
-gravity_scale = 0.01
-walkSpeed = 20.0
-
 [node name="Box" parent="." unique_id=328725460 instance=ExtResource("2_pvio2")]
 position = Vector2(0, 39)
 
@@ -48,20 +42,31 @@ position = Vector2(76, -45)
 [node name="Box7" parent="." unique_id=1644038858 instance=ExtResource("2_pvio2")]
 position = Vector2(100, 20)
 
-[node name="Flying Enemy" parent="." unique_id=1179070169 instance=ExtResource("3_tseap")]
-position = Vector2(72, 35)
+[node name="Player" parent="." unique_id=2059546600 instance=ExtResource("4_q2mww")]
+position = Vector2(-112, -6)
+
+[node name="Flying Enemy" parent="." unique_id=1179070169 groups=["Enemy"] instance=ExtResource("3_tseap")]
+position = Vector2(122, -95)
 idleSpeed = 200.0
 attackSpeed = 80.0
-
-[node name="Player" parent="." unique_id=2059546600 instance=ExtResource("4_q2mww")]
-position = Vector2(-25, -34)
+attackCooldownMax = 5.0
+canAttackColor = Color(0, 1, 0, 1)
+cantAttackColor = Color(1, 0, 0, 0.5)
+contactDamage = 1.0
+maxHP = 10
 
 [node name="Ceiling Enemy" parent="." unique_id=286744557 instance=ExtResource("5_fs0qc")]
 position = Vector2(-118, -54)
 attackSpeed = 1.0
 attackCooldownMax = 10.0
 
-[node name="Shooting Enemy" parent="." unique_id=1082487563 instance=ExtResource("6_53l5r")]
-position = Vector2(-6, 7)
+[node name="Shooting Enemy" parent="." unique_id=1082487563 groups=["Enemy"] instance=ExtResource("6_53l5r")]
+position = Vector2(77, -76)
 angleOffsetRad = 3.142
 attackCooldownMax = 2.0
+
+[node name="Jumping Enemy" parent="." unique_id=1226206699 groups=["Enemy"] instance=ExtResource("1_t8efy")]
+position = Vector2(12, 8)
+mass = 0.1
+gravity_scale = 0.01
+walkSpeed = 20.0

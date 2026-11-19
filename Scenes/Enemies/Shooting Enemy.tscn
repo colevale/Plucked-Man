@@ -2,26 +2,30 @@
 
 [ext_resource type="Script" uid="uid://5t0tj411jbi6" path="res://Scripts/Enemies/Shooting Enemy.gd" id="1_jqi0j"]
 [ext_resource type="Texture2D" uid="uid://dx81vjmoh7yy4" path="res://Art/Sprites/Placeholders/Ground Enemy Placeholder.png" id="2_rwdyd"]
+[ext_resource type="Shader" uid="uid://bwnwf4ovj11kg" path="res://Shaders/Searchlight.tres" id="3_g1hfc"]
+[ext_resource type="Texture2D" uid="uid://behig4ywdgxra" path="res://Art/Sprites/Tiles/Tile 1.png" id="4_wned8"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g4v7s"]
 size = Vector2(26, 25)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ccoe2"]
+resource_local_to_scene = true
+shader = ExtResource("3_g1hfc")
+shader_parameter/Color = Color(0.113725, 1, 0.117647, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yf5fn"]
+size = Vector2(38, 27)
 
 [node name="Shooting Enemy" type="RigidBody2D" unique_id=1226206699]
 gravity_scale = 0.0
 lock_rotation = true
 script = ExtResource("1_jqi0j")
 projectileScene = "res://Scenes/Testing/Projectile.tscn"
+customSearchlightBehavior = true
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1271838719]
 self_modulate = Color(0.1254902, 0.10980392, 0.8039216, 1)
 texture_filter = 1
-texture = ExtResource("2_rwdyd")
-
-[node name="Search Indicator" type="Sprite2D" parent="." unique_id=613278645]
-self_modulate = Color(0.1254902, 0.9490196, 0.8039216, 0.5294118)
-texture_filter = 1
-position = Vector2(0, -58)
-scale = Vector2(0.5, 0.5)
 texture = ExtResource("2_rwdyd")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=6985070]
@@ -43,3 +47,16 @@ target_position = Vector2(0, 17)
 
 [node name="Search Ray" type="RayCast2D" parent="Rays" unique_id=1504582484]
 target_position = Vector2(0, -60)
+
+[node name="Searchlight" type="Sprite2D" parent="." unique_id=789158073]
+material = SubResource("ShaderMaterial_ccoe2")
+scale = Vector2(5, 0.6)
+texture = ExtResource("4_wned8")
+
+[node name="Contact Hitbox" type="Area2D" parent="." unique_id=1385418897]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Contact Hitbox" unique_id=759079309]
+position = Vector2(0, 1.5)
+shape = SubResource("RectangleShape2D_yf5fn")
+
+[connection signal="body_entered" from="Contact Hitbox" to="." method="_on_contact_hitbox_body_entered"]

@@ -4,7 +4,6 @@ extends GroundEnemy
 var searchAngle : float
 var searchSpeed : float = 1
 var searchDist : float
-var searchIndicator : Node2D
 
 @export var seekDir : float = 1
 @export var minAngleRad : float = 0
@@ -18,7 +17,6 @@ var searchIndicator : Node2D
 func _ready() :
 	super._ready()
 	searchDist = searchRay.target_position.length()
-	searchIndicator = $"Search Indicator"
 
 func _scan(delta : float) :
 	super._scan(delta)
@@ -30,11 +28,11 @@ func _scan(delta : float) :
 	
 	var searchDir = Vector2.from_angle(searchAngle+angleOffsetRad)*searchDist
 	
-	searchIndicator.position = searchDir	
-	searchRay.target_position = searchIndicator.position
+	searchRay.target_position = searchDir
+	searchLight.rotation = get_angle_to(global_position + searchDir)
 	
 	
-	if attackCooldownCur <= 0 && searchRay.is_colliding() && searchRay.get_collider().get("name") == "Player" :
+	if _hasValidTarget() :
 		_attack(searchRay.get_collider())
 		
 		

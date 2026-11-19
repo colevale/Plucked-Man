@@ -2,15 +2,31 @@
 
 [ext_resource type="Script" uid="uid://c3wrns6wr5kdu" path="res://Scripts/Enemies/Flying Enemy.gd" id="1_v1upi"]
 [ext_resource type="Texture2D" uid="uid://uwl6xlu3eum3" path="res://Art/Sprites/Placeholders/Flying Enemy Placeholder.png" id="2_v1upi"]
+[ext_resource type="Shader" uid="uid://bwnwf4ovj11kg" path="res://Shaders/Searchlight.tres" id="3_4ssds"]
+[ext_resource type="Texture2D" uid="uid://behig4ywdgxra" path="res://Art/Sprites/Tiles/Tile 1.png" id="4_wvv6m"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g4v7s"]
 size = Vector2(26, 14)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ccoe2"]
+resource_local_to_scene = true
+shader = ExtResource("3_4ssds")
+shader_parameter/Color = Color(0.113725, 1, 0.117647, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yf5fn"]
+size = Vector2(32, 20)
 
 [node name="Flying Enemy" type="RigidBody2D" unique_id=1226206699]
 gravity_scale = 0.0
 lock_rotation = true
 script = ExtResource("1_v1upi")
+idleSpeed = null
 attackSpeed = 50.0
+attackCooldownMax = null
+canAttackColor = null
+cantAttackColor = null
+contactDamage = null
+maxHP = null
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1271838719]
 texture_filter = 1
@@ -19,12 +35,10 @@ texture = ExtResource("2_v1upi")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=6985070]
 shape = SubResource("RectangleShape2D_g4v7s")
 
-[node name="Search Indicator" type="Sprite2D" parent="." unique_id=322276839]
-modulate = Color(1, 0.23921569, 0.21568628, 0.44705883)
-texture_filter = 1
-position = Vector2(-100, 0)
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("2_v1upi")
+[node name="Searchlight" type="Sprite2D" parent="." unique_id=854940710]
+material = SubResource("ShaderMaterial_ccoe2")
+scale = Vector2(5, 1)
+texture = ExtResource("4_wvv6m")
 
 [node name="Rays" type="Node2D" parent="." unique_id=1826683047]
 
@@ -41,4 +55,12 @@ target_position = Vector2(0, -25)
 target_position = Vector2(0, 40)
 
 [node name="Search Ray" type="RayCast2D" parent="Rays" unique_id=2012153237]
-target_position = Vector2(34, -30)
+target_position = Vector2(75, 0)
+
+[node name="Contact Hitbox" type="Area2D" parent="." unique_id=1487254039]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Contact Hitbox" unique_id=1474026910]
+shape = SubResource("RectangleShape2D_yf5fn")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_entered" from="Contact Hitbox" to="." method="_on_contact_hitbox_body_entered"]

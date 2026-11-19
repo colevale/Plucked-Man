@@ -3,7 +3,7 @@ extends GroundEnemy
 
 @export var jumpHeight : float = 5
 
-var landCooldown : float = 0.2
+var landCooldown : float = 0.5
 
 func _scan(_delta : float):
 	if !isAttacking && attackCooldownCur <= 0 && searchRay.is_colliding() && searchRay.get_collider().get("name") == "Player" :

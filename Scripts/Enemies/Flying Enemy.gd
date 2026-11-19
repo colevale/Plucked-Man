@@ -10,8 +10,8 @@ var searchAngle : float = 0
 var searchSpeed : float = 1
 var searchDist : float
 
-var searchIndicator : Node2D
-var searchRay : RayCast2D
+var curDir : float = 1
+
 
 
 # Called when the node enters the scene tree for the first time.
@@ -21,10 +21,8 @@ func _ready() -> void:
 	
 	for i in $"Rays".get_children() :
 		positionRays.append(i)
-	
-	searchRay = $"Rays/Search Ray"
-	searchIndicator = $"Search Indicator"
-	searchDist = (global_position - searchIndicator.global_position).length()
+	searchDist = searchRay.target_position.length()
+	searchLight.scale.x = searchDist/16
 
 func _move(delta : float) :
 	super._move(delta)
@@ -38,23 +36,26 @@ func _move(delta : float) :
 
 func _attackMove(delta : float):
 	super._attackMove(delta)
-	global_position += delta * searchIndicator.position.normalized() * attackSpeed
+	global_position += delta * searchRay.target_position.normalized() * attackSpeed
 	if searchRay.is_colliding() :
 		_endAttack()
 
 func _scan(delta : float) :
 	super._scan(delta)
-	searchAngle += delta * searchSpeed
+	searchAngle += delta * searchSpeed * curDir
 	if searchAngle > PI :
-		searchAngle -= PI * 2
+		curDir = -1
+	elif searchAngle < -PI :
+		curDir = 1
 	
 	var searchDir = Vector2.from_angle(searchAngle+PI/2)*searchDist
-	if searchAngle > 0 :
-		searchDir.y *= -1
-	searchIndicator.position = searchDir
+	#if searchAngle > 0 :
+	#	searchDir.y *= -1
 	
-	searchRay.target_position = searchIndicator.position
 	
+	
+	searchRay.target_position = searchDir
+	searchLight.rotation = get_angle_to(global_position + searchDir)
 	
 	if attackCooldownCur <= 0 && searchRay.is_colliding() && searchRay.get_collider().get("name") == "Player" :
 		_attack(searchRay.get_collider())
@@ -62,5 +63,8 @@ func _scan(delta : float) :
 		
 func _attack(node : Node2D):
 	super._attack(node)
-	searchIndicator.position /= 5
-	searchRay.target_position = searchIndicator.position
+	searchRay.target_position /= 5
+	
+
+func _on_contact_hitbox_body_entered(body: Node2D) -> void:
+	super._on_contact_hitbox_body_entered(body)
