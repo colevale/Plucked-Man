@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://b5msxrojcfplj"]
+
+[ext_resource type="Texture2D" uid="uid://b6fh5wf78njth" path="res://Art/Sprites/Tiles/Tile 2.png" id="1_b07ii"]
+[ext_resource type="Script" uid="uid://dqvj35svxunob" path="res://Scripts/Level Objects/Barrier.gd" id="2_m515f"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_m515f"]
+texture = ExtResource("1_b07ii")
+0:0/size_in_atlas = Vector2i(2, 2)
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="TileSet" id="TileSet_g4v7s"]
+tile_size = Vector2i(32, 32)
+physics_layer_0/collision_layer = 1
+sources/0 = SubResource("TileSetAtlasSource_m515f")
+
+[node name="Barrier" type="TileMapLayer" unique_id=2019439973]
+tile_set = SubResource("TileSet_g4v7s")
+script = ExtResource("2_m515f")

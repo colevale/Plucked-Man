@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://cy31bsfpf6uhl"]
+
+[ext_resource type="Texture2D" uid="uid://0j23wcjyflt7" path="res://Art/Sprites/Placeholders/Button.png" id="1_r7k2b"]
+[ext_resource type="Script" uid="uid://bqt3ah30kpctx" path="res://Scripts/Level Objects/Button.gd" id="1_thf3a"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_g4v7s"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_r7k2b")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yf5fn"]
+size = Vector2(20, 9)
+
+[node name="Button" type="Area2D" unique_id=783043058]
+collision_mask = 8
+script = ExtResource("1_thf3a")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1231583787]
+position = Vector2(0, -16)
+sprite_frames = SubResource("SpriteFrames_g4v7s")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2012788859]
+position = Vector2(0, -4.5)
+shape = SubResource("RectangleShape2D_yf5fn")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

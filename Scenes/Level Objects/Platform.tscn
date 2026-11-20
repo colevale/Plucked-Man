@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://c0gb8pqjax772"]
+
+[ext_resource type="Texture2D" uid="uid://bpek65jw7rcp3" path="res://Art/Sprites/Tiles/Tile 3.png" id="1_74tnx"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g4v7s"]
+size = Vector2(32, 32)
+
+[node name="Platform" type="AnimatableBody2D" unique_id=470701900]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=149543943]
+texture = ExtResource("1_74tnx")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=932153449]
+shape = SubResource("RectangleShape2D_g4v7s")
+one_way_collision = true
