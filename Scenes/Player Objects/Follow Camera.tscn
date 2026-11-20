@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://kc584722235l"]
+
+[ext_resource type="Script" uid="uid://bggwwrpcj0ee2" path="res://Scripts/Player Objects/Follow Camera.gd" id="1_en6wu"]
+
+[node name="FollowCamera" type="Camera2D" unique_id=672479724]
+zoom = Vector2(2, 2)
+limit_smoothed = true
+position_smoothing_enabled = true
+script = ExtResource("1_en6wu")
