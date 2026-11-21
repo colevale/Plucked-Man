@@ -21,6 +21,7 @@ radius = 9.0
 height = 26.0
 
 [node name="Player" type="CharacterBody2D" unique_id=860349107]
+collision_layer = 9
 script = ExtResource("1_nuuxw")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=64589258]
@@ -33,6 +34,8 @@ shape = SubResource("CircleShape2D_yf5fn")
 
 [node name="RoomDetector" type="Area2D" parent="." unique_id=485482395]
 position = Vector2(0, -14)
+collision_layer = 0
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RoomDetector" unique_id=807718335]
 position = Vector2(0, 1)

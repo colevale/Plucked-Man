@@ -23,12 +23,15 @@ var heldPluckman: Node2D
 var holdingPluckman: bool = false
 var facingDirection: int = 1 #1 or -1 depending on direction
 
+func _ready() -> void:
+	pass
+
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
 	if not is_on_floor():
 		velocity += get_gravity() * delta
 
-	# Handle jump and falling through platforms
+	# Handle jump and falling through platforms, currently using layer 5 as a method for platforms you can drop down from, but can be changed
 	if Input.is_action_just_pressed("jump"):
 		if Input.is_action_pressed("crouch"):
 			set_collision_mask_value(5, false)

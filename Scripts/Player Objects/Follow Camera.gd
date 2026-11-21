@@ -39,8 +39,9 @@ func setup_camera_limits():
 	limit_bottom = limit_top + map_height
 	
 	#Test Script to see limits
-	#print("Tilemap Limits: left: ", limit_left ,", right: ", limit_right ,", top: ", limit_top ,", bottom: ", limit_bottom)
-	#print("Tilemap size (px): ", map_width, "x ", map_height, "y")
+	print("used_rect: ", used_rect, " cell_size: ", cell_size, " map_width: ", map_width, " map_height: ", map_height)
+	print("Tilemap Limits: left: ", limit_left ,", right: ", limit_right ,", top: ", limit_top ,", bottom: ", limit_bottom)
+	print("Tilemap size (px): ", map_width, "x ", map_height, "y")
 
 # Updates and Moves According to the Player
 func update_camera_position(delta):
