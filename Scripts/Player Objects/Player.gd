@@ -73,6 +73,12 @@ func _physics_process(delta: float) -> void:
 		var target_index = (i+1) * spacing
 		if target_index < pluckmanPos_hist.size():
 			pluckmanArray[i].targetPos = pluckmanPos_hist[target_index]
+		
+		# function to make sure that pluckmen know if player is grounded or not
+		if not is_on_floor():
+			pluckmanArray[i].change_playerGrounded(false)
+		elif is_on_floor():
+			pluckmanArray[i].change_playerGrounded(true)
 	
 	#Pluckman Throwing
 	if pluckmanArray.size() != 0:

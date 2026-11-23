@@ -23,6 +23,9 @@ height = 26.0
 [node name="Player" type="CharacterBody2D" unique_id=860349107]
 collision_layer = 9
 script = ExtResource("1_nuuxw")
+spacing = null
+throw_speed = null
+throw_angle = null
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=64589258]
 position = Vector2(0, -16)

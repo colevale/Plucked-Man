@@ -13,6 +13,8 @@ enum State { IDLE, FOLLOWING, THROWN }
 @export var jump_velocity: float = -400.0
 @export var jump_threshold: float = 50.0
 
+var playerGrounded: bool = true
+
 #Throwing Variables
 @export var friction: float = 1200.0
 
@@ -45,7 +47,7 @@ func following_commands(delta: float):
 		velocity.x = move_toward(velocity.x, 0, follow_speed)
 	
 	# Checks if it is on the floor and player is above a certain height
-	if is_on_floor() and (global_position.y - targetPos.y) > jump_threshold:
+	if is_on_floor() and abs(global_position.y - targetPos.y) > jump_threshold and !playerGrounded:
 		velocity.y = jump_velocity
 	
 	# Gravity function
@@ -88,6 +90,9 @@ func change_state(index: int):
 			#print("error: not a state")
 	
 	pluckman_state = index
+
+func change_playerGrounded(state: bool):
+	playerGrounded = state
 
 # Function on picking up pluckman
 func _on_pickup_area_body_entered(body: Node2D) -> void:
