@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 # States Pluckman can be in
-enum State { IDLE, FOLLOWING, THROWN }
+enum State { IDLE, FOLLOWING, THROWN, CONTROL}
 
 # Collision Variables
 @onready var physicsCollider: CollisionShape2D = $CollisionShape2D
@@ -20,6 +20,7 @@ var playerGrounded: bool = true
 
 var targetPos: Vector2
 var isThrown: bool = false
+var controlable: bool = false
 
 func _ready():
 	#Turns off physics collider and sets the target position to where it is on spawn
@@ -32,6 +33,10 @@ func _physics_process(delta: float) -> void:
 		following_commands(delta)
 	elif pluckman_state == State.THROWN:
 		throwing_commands(delta)
+	elif pluckman_state == State.CONTROL:
+		control_commands(delta)
+	
+	#print(pluckman_state)
 	
 	move_and_slide()
 
@@ -64,9 +69,17 @@ func throwing_commands(delta: float):
 		velocity.x = move_toward(velocity.x, 0, friction * delta) # Adds friction to throw
 		isThrown = false # Changes throw bool
 		if velocity == Vector2.ZERO: # Sets back to idle when it stops moving // If we add a state for when it can be commanded should go here
-			change_state(0)
-			physicsCollider.set_deferred("disabled", true)
+			change_state(3)
+			controlable = true
+			physicsCollider.set_deferred("disabled", false)
 			pickupCollider.set_deferred("disabled", false)
+
+func control_commands(delta: float):
+	if controlable == false:
+		pass
+	
+	if not is_on_floor():
+		velocity += get_gravity() * delta
 
 # Function for throwing 
 func throw(throwVelocity: Vector2) -> void:
@@ -98,7 +111,7 @@ func change_playerGrounded(state: bool):
 func _on_pickup_area_body_entered(body: Node2D) -> void:
 	# Checks if it's player (can probably be better than this)
 	if body is CharacterBody2D:
-		if pluckman_state != State.FOLLOWING and body.pluckmanArray.size() < 3: # Checks if the pluckman not following and if the array is the right size (should probably change to a get variable)
+		if pluckman_state == State.IDLE and body.addMorePluckman(): # Checks if the pluckman not following and if the array is the right size (should probably change to a get variable)
 			# Turns on physics collider, adds the pluckman, turns off pickup collider (a little redundant but can be changed later)
 			physicsCollider.set_deferred("disabled", false)
 			pluckman_state = State.FOLLOWING

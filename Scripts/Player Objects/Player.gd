@@ -12,12 +12,14 @@ const JUMP_VELOCITY = -400.0
 @export var camera: Camera2D
 
 # Pluckman Variables
+@export var pluckmanAmount: int = 3
 @export var spacing: int = 15
 @export var throw_speed: float = 400.0
 @export var throw_angle: float = -40.0
 
 var pluckmanPos_hist: Array[Vector2] = [] # Position array
 var pluckmanArray: Array[Node2D] = [] # Pluckman Node array
+var thrownPluckmen: Array[Node2D] = []
 
 var heldPluckman: Node2D
 var holdingPluckman: bool = false
@@ -81,16 +83,25 @@ func _physics_process(delta: float) -> void:
 			pluckmanArray[i].change_playerGrounded(true)
 	
 	#Pluckman Throwing
-	if pluckmanArray.size() != 0:
+	if pluckmanArray.size() > 0:
 		if Input.is_action_just_pressed("shoot") and holdingPluckman == false:
 			holdingPluckman = true
 			heldPluckman = pluckmanArray.pop_front()
+			thrownPluckmen.push_front(heldPluckman)
 			heldPluckman.global_position = throw_point.global_position
 			var angle = deg_to_rad(throw_angle)
 			var throw_velocity = Vector2(cos(angle) * throw_speed * facingDirection, sin(angle) * throw_speed)
 			heldPluckman.throw(throw_velocity)
 			heldPluckman.change_state(2) #Thrown State
 			holdingPluckman = false
+
+	if thrownPluckmen.size() > 0:
+		if Input.is_action_just_pressed("recall"):
+			for i in range(thrownPluckmen.size()):
+				var currentPluckman = thrownPluckmen.pop_front()
+				currentPluckman.change_state(1)
+				currentPluckman.position = $ThrowPoint.global_position
+				pluckmanArray.push_back(currentPluckman)
 
 	move_and_slide()
 
@@ -102,3 +113,10 @@ func _on_room_detector_area_entered(area: Area2D) -> void:
 # Add Pluckman Function
 func add_pluckman(newPluckman: Node2D) -> void:
 	pluckmanArray.append(newPluckman)
+
+func addMorePluckman():
+	var currentPluckmenHeld = pluckmanArray.size() + thrownPluckmen.size()
+	if currentPluckmenHeld < pluckmanAmount:
+		return true
+	else:
+		return false

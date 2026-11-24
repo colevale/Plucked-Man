@@ -20,6 +20,9 @@ radius = 6.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_57qmd"]
 radius = 12.0
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_g4v7s"]
+radius = 144.03125
+
 [node name="Pluckman" type="CharacterBody2D" unique_id=581896398]
 collision_layer = 8
 script = ExtResource("1_e8lqk")
@@ -39,4 +42,11 @@ collision_layer = 0
 position = Vector2(0, -12)
 shape = SubResource("CircleShape2D_57qmd")
 
+[node name="SearchArea" type="Area2D" parent="." unique_id=335599660]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SearchArea" unique_id=404790550]
+shape = SubResource("CircleShape2D_g4v7s")
+debug_color = Color(0, 0.6, 0.69803923, 0.21568628)
+
 [connection signal="body_entered" from="PickupArea" to="." method="_on_pickup_area_body_entered"]
+[connection signal="body_exited" from="SearchArea" to="." method="_on_search_area_body_exited"]
