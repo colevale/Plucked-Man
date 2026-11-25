@@ -22,6 +22,15 @@ var targetPos: Vector2
 var isThrown: bool = false
 var controlable: bool = false
 
+#Controlling Variables
+@export var spriteRadius: float = 24.0
+@export var moveAreaRadius: float = 200.0
+
+var clickPos: Vector2
+var clicked: bool = false
+var move: bool = false
+var posToGo: Vector2
+
 func _ready():
 	#Turns off physics collider and sets the target position to where it is on spawn
 	physicsCollider.set_deferred("disabled", true)
@@ -39,6 +48,10 @@ func _physics_process(delta: float) -> void:
 	#print(pluckman_state)
 	
 	move_and_slide()
+
+# Save for later if we want to do draggables
+func _input(event):
+	pass
 
 #If State = 1
 func following_commands(delta: float):
@@ -74,9 +87,30 @@ func throwing_commands(delta: float):
 			physicsCollider.set_deferred("disabled", false)
 			pickupCollider.set_deferred("disabled", false)
 
+
+			
 func control_commands(delta: float):
-	if controlable == false:
-		pass
+	if controlable == true:		
+		if Input.is_action_just_pressed("shoot"):
+			clickPos = get_global_mouse_position()
+			if not clicked:
+				if position.distance_to(clickPos) < spriteRadius:
+					clicked = true
+			elif clicked:
+				if position.distance_to(clickPos) < moveAreaRadius:
+					posToGo = (clickPos - position).normalized()
+					clicked = false
+					move = true
+		
+		# fix this 
+		if move == true:
+			if global_position.distance_to(posToGo) > 5.0:
+				var direction = global_position.direction_to(posToGo)
+				velocity.x = direction.x * follow_speed
+				if abs(global_position.x - posToGo.x) < 5:
+					velocity.x = 0
+					move = false
+				
 	
 	if not is_on_floor():
 		velocity += get_gravity() * delta
