@@ -29,7 +29,6 @@ var controlable: bool = false
 var clickPos: Vector2
 var clicked: bool = false
 var move: bool = false
-var posToGo: Vector2
 
 func _ready():
 	#Turns off physics collider and sets the target position to where it is on spawn
@@ -98,18 +97,19 @@ func control_commands(delta: float):
 					clicked = true
 			elif clicked:
 				if position.distance_to(clickPos) < moveAreaRadius:
-					posToGo = (clickPos - position).normalized()
-					clicked = false
 					move = true
+				clicked = false
 		
-		# fix this 
 		if move == true:
-			if global_position.distance_to(posToGo) > 5.0:
-				var direction = global_position.direction_to(posToGo)
-				velocity.x = direction.x * follow_speed
-				if abs(global_position.x - posToGo.x) < 5:
-					velocity.x = 0
-					move = false
+			var distance = clickPos.x - global_position.x
+			if abs(distance) <= follow_speed * delta:
+				velocity.x = 0.0
+				global_position.x = clickPos.x
+				move = false
+			else:
+				velocity.x = sign(distance) * follow_speed
+		else:
+			velocity.x = 0
 				
 	
 	if not is_on_floor():
