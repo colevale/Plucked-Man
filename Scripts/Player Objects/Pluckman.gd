@@ -89,8 +89,8 @@ func throwing_commands(delta: float):
 
 			
 func control_commands(delta: float):
-	if controlable == true:		
-		if Input.is_action_just_pressed("shoot"):
+	if controlable == true:
+		if Input.is_action_just_pressed("click"):
 			clickPos = get_global_mouse_position()
 			if not clicked:
 				if position.distance_to(clickPos) < spriteRadius:
@@ -144,7 +144,7 @@ func change_playerGrounded(state: bool):
 # Function on picking up pluckman
 func _on_pickup_area_body_entered(body: Node2D) -> void:
 	# Checks if it's player (can probably be better than this)
-	if body is CharacterBody2D:
+	if body.is_in_group("Player"):
 		if pluckman_state == State.IDLE and body.addMorePluckman(): # Checks if the pluckman not following and if the array is the right size (should probably change to a get variable)
 			# Turns on physics collider, adds the pluckman, turns off pickup collider (a little redundant but can be changed later)
 			physicsCollider.set_deferred("disabled", false)

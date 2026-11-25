@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://dixyv8s0jl1ml" path="res://Scenes/Player Objects/Pluckman.tscn" id="7_iiopb"]
 [ext_resource type="PackedScene" uid="uid://b5msxrojcfplj" path="res://Scenes/Level Objects/Barrier.tscn" id="8_fgef6"]
 [ext_resource type="PackedScene" uid="uid://cy31bsfpf6uhl" path="res://Scenes/Level Objects/Button.tscn" id="9_e80ih"]
+[ext_resource type="PackedScene" uid="uid://bifg0kc2q2r0o" path="res://Scenes/Level Objects/Lever.tscn" id="10_fgef6"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_4ayqm"]
 texture = ExtResource("4_iiopb")
@@ -212,3 +213,12 @@ collision_mask = 0
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Node/Room2/Room2Area" unique_id=2043971061]
 polygon = PackedVector2Array(355, -32, 448, -32, 448, -192, 896, -192, 896, 160, 736, 160, 736, 32, 354, 33)
+
+[node name="Lever" parent="." unique_id=1844499029 node_paths=PackedStringArray("barrier") instance=ExtResource("10_fgef6")]
+position = Vector2(241, 33)
+barrier = NodePath("../Barrier")
+
+[node name="Barrier" parent="." unique_id=460490677 instance=ExtResource("8_fgef6")]
+z_index = 2
+position = Vector2(162, -162)
+tile_map_data = PackedByteArray("AAAAAAEAAAAAAAAAAAABAAEAAAAAAAAAAAA=")
