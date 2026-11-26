@@ -1,0 +1,197 @@
+[gd_scene format=3 uid="uid://br5ujcjm6x6v5"]
+
+[ext_resource type="PackedScene" uid="uid://blc5ag1eshpmt" path="res://Scenes/Enemies/Basic Enemy.tscn" id="1_w6m6g"]
+[ext_resource type="Script" uid="uid://5t0tj411jbi6" path="res://Scripts/Enemies/Shooting Enemy.gd" id="2_lstfk"]
+[ext_resource type="Shader" uid="uid://bwnwf4ovj11kg" path="res://Shaders/Searchlight.tres" id="2_wpo4r"]
+[ext_resource type="Texture2D" uid="uid://b03fqe73g425k" path="res://Art/Sprites/Enemies/Tankle.png" id="3_wpo4r"]
+[ext_resource type="Texture2D" uid="uid://cc12jh3ajljfq" path="res://Art/Sprites/Enemies/Treads.png" id="4_0uv7q"]
+[ext_resource type="Texture2D" uid="uid://bu4t56fo04lq5" path="res://Art/Sprites/Enemies/Bot Eyes.png" id="8_04mpc"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jdhqn"]
+size = Vector2(26, 12)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0uv7q"]
+resource_local_to_scene = true
+shader = ExtResource("2_wpo4r")
+shader_parameter/Color = Color(0.113725, 1, 0.117647, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mhyh6"]
+size = Vector2(30, 14)
+
+[sub_resource type="Animation" id="Animation_ffv6g"]
+resource_name = "Frame Bob"
+length = 4.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Frame:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2, 3, 4),
+"transitions": PackedFloat32Array(1000000, 1000000, 1000000, 1000000, 1000000),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 0.5), Vector2(0, 0), Vector2(0, -0.5), Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_8hkfm"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Frame:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_04mpc"]
+_data = {
+&"Frame Bob": SubResource("Animation_ffv6g"),
+&"RESET": SubResource("Animation_8hkfm")
+}
+
+[sub_resource type="Animation" id="Animation_lx01h"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Treads:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_pfk8i"]
+resource_name = "Treads"
+length = 4.0
+loop_mode = 1
+step = 1.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Treads:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2, 3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5jpvv"]
+_data = {
+&"RESET": SubResource("Animation_lx01h"),
+&"Treads": SubResource("Animation_pfk8i")
+}
+
+[node name="Tankle" unique_id=118655659 instance=ExtResource("1_w6m6g")]
+script = ExtResource("2_lstfk")
+minAngleRad = 0.0
+maxAngleRad = 1.5707963267948966
+angleOffsetRad = 3.142
+projectileScene = "res://Scenes/Testing/Projectile.tscn"
+walkSpeed = 10.0
+startDirection = 1.0
+customSearchlightBehavior = true
+turnOnPlayer = true
+eyeRow = 3
+
+[node name="CollisionShape2D" parent="." index="0" unique_id=271179105]
+position = Vector2(0, 2)
+shape = SubResource("RectangleShape2D_jdhqn")
+
+[node name="Search Ray" parent="Rays" parent_id_path=PackedInt32Array(291469396) index="0" unique_id=274638612]
+collision_mask = 9
+collide_with_areas = true
+
+[node name="Horizontal Ray" type="RayCast2D" parent="Rays" parent_id_path=PackedInt32Array(291469396) index="1" unique_id=530258545]
+target_position = Vector2(18, 0)
+
+[node name="Left Vertical Ray" type="RayCast2D" parent="Rays" parent_id_path=PackedInt32Array(291469396) index="2" unique_id=1525670196]
+position = Vector2(-11, 0)
+target_position = Vector2(0, 17)
+
+[node name="Right Vertical Ray" type="RayCast2D" parent="Rays" parent_id_path=PackedInt32Array(291469396) index="3" unique_id=2005461684]
+position = Vector2(11, 0)
+target_position = Vector2(0, 17)
+
+[node name="Searchlight" parent="." index="2" unique_id=229370074]
+material = SubResource("ShaderMaterial_0uv7q")
+
+[node name="CollisionShape2D" parent="Contact Hitbox" parent_id_path=PackedInt32Array(2025154701) index="0" unique_id=194725216]
+position = Vector2(0, 1)
+shape = SubResource("RectangleShape2D_mhyh6")
+
+[node name="Sprites" type="Node2D" parent="." index="4" unique_id=828535819]
+
+[node name="Treads" type="Sprite2D" parent="Sprites" index="0" unique_id=1061019565]
+position = Vector2(0, 5)
+rotation = 3.1415927
+texture = ExtResource("4_0uv7q")
+vframes = 4
+
+[node name="Frame" type="Sprite2D" parent="Sprites" index="1" unique_id=846778078]
+texture = ExtResource("3_wpo4r")
+vframes = 5
+
+[node name="Eye Frame" type="Sprite2D" parent="Sprites/Frame" index="0" unique_id=1187896100]
+texture = ExtResource("3_wpo4r")
+vframes = 5
+frame = 1
+
+[node name="Eyes" type="Sprite2D" parent="Sprites/Frame/Eye Frame" index="0" unique_id=1244954246]
+self_modulate = Color(0.1764706, 0.7254902, 0.27058825, 1)
+position = Vector2(0, 1)
+texture = ExtResource("8_04mpc")
+hframes = 4
+vframes = 4
+frame = 12
+
+[node name="Cannon 1" type="Sprite2D" parent="Sprites/Frame" index="1" unique_id=298641283]
+show_behind_parent = true
+position = Vector2(0, -10)
+texture = ExtResource("3_wpo4r")
+vframes = 5
+frame = 2
+
+[node name="Cannon 4" type="Sprite2D" parent="Sprites/Frame" index="2" unique_id=511238888]
+show_behind_parent = true
+position = Vector2(0, -5)
+texture = ExtResource("3_wpo4r")
+vframes = 5
+frame = 4
+
+[node name="Cannon 3" type="Sprite2D" parent="Sprites/Frame" index="3" unique_id=365771308]
+show_behind_parent = true
+position = Vector2(0, -5)
+texture = ExtResource("3_wpo4r")
+vframes = 5
+frame = 4
+
+[node name="Cannon 2" type="Sprite2D" parent="Sprites/Frame" index="4" unique_id=1187500137]
+show_behind_parent = true
+position = Vector2(0, -7)
+texture = ExtResource("3_wpo4r")
+vframes = 5
+frame = 3
+
+[node name="Frame Bob Anim" type="AnimationPlayer" parent="Sprites" index="2" unique_id=896370403]
+libraries/ = SubResource("AnimationLibrary_04mpc")
+autoplay = &"Frame Bob"
+speed_scale = 4.0
+
+[node name="Treads Anim" type="AnimationPlayer" parent="Sprites" index="3" unique_id=1224806929]
+libraries/ = SubResource("AnimationLibrary_5jpvv")
+autoplay = &"Treads"
+speed_scale = 4.0

@@ -1,0 +1,199 @@
+[gd_scene format=3 uid="uid://c174nq0003hbp"]
+
+[ext_resource type="PackedScene" uid="uid://blc5ag1eshpmt" path="res://Scenes/Enemies/Basic Enemy.tscn" id="1_qbug7"]
+[ext_resource type="Shader" uid="uid://bwnwf4ovj11kg" path="res://Shaders/Searchlight.tres" id="2_bu770"]
+[ext_resource type="Script" uid="uid://f026c1rwcnr4" path="res://Scripts/Enemies/Charging Enemy.gd" id="2_f7wve"]
+[ext_resource type="Texture2D" uid="uid://cvev3cfe8ouw0" path="res://Art/Sprites/Enemies/Scrubot  Brush.png" id="3_hyncy"]
+[ext_resource type="Texture2D" uid="uid://bcoand2l7ie4c" path="res://Art/Sprites/Enemies/Scrubot.png" id="3_s1u4b"]
+[ext_resource type="Texture2D" uid="uid://bu4t56fo04lq5" path="res://Art/Sprites/Enemies/Bot Eyes.png" id="4_hyncy"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bhdhs"]
+size = Vector2(24, 14)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_f7wve"]
+resource_local_to_scene = true
+shader = ExtResource("2_bu770")
+shader_parameter/Color = Color(0.113725, 1, 0.117647, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5xfs1"]
+size = Vector2(28, 15.5)
+
+[sub_resource type="Animation" id="Animation_f7wve"]
+resource_name = "Brush Walk"
+length = 6.0
+loop_mode = 1
+step = 1.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Treads:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2, 3, 4, 5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [1, 2, 3, 4, 5, 6]
+}
+
+[sub_resource type="Animation" id="Animation_bwkrq"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Treads:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_a6mvl"]
+_data = {
+&"Brush Walk": SubResource("Animation_f7wve"),
+&"RESET": SubResource("Animation_bwkrq")
+}
+
+[sub_resource type="Animation" id="Animation_ffv6g"]
+resource_name = "Frame Bob"
+length = 4.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Frame:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2, 3, 4),
+"transitions": PackedFloat32Array(1000000, 1000000, 1000000, 1000000, 1000000),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 0.5), Vector2(0, 0), Vector2(0, -0.5), Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_hyncy"]
+resource_name = "Frame Bob Horiz"
+length = 4.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Frame:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2, 3, 4),
+"transitions": PackedFloat32Array(1000000, 1000000, 1000000, 1000000, 1000000),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0.5, 0), Vector2(0, 0), Vector2(-0.5, 0), Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_8hkfm"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Frame:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_hyncy"]
+_data = {
+&"Frame Bob": SubResource("Animation_ffv6g"),
+&"Frame Bob Horiz": SubResource("Animation_hyncy"),
+&"RESET": SubResource("Animation_8hkfm")
+}
+
+[node name="Scrubot" unique_id=118655659 instance=ExtResource("1_qbug7")]
+script = ExtResource("2_f7wve")
+jumpHeight = 5.0
+walkSpeed = 10.0
+startDirection = 1.0
+customSearchlightBehavior = false
+turnOnPlayer = false
+eyeRow = 1
+eyesNeutralPos = Vector2(-9, 2)
+eyesSidePos = Vector2(-6, 3)
+
+[node name="CollisionShape2D" parent="." index="0" unique_id=271179105]
+position = Vector2(0, 1)
+shape = SubResource("RectangleShape2D_bhdhs")
+
+[node name="Horizontal Ray" type="RayCast2D" parent="Rays" parent_id_path=PackedInt32Array(291469396) index="1" unique_id=48133772]
+target_position = Vector2(14, 0)
+
+[node name="Left Vertical Ray" type="RayCast2D" parent="Rays" parent_id_path=PackedInt32Array(291469396) index="2" unique_id=13977972]
+position = Vector2(-11, 0)
+target_position = Vector2(0, 17)
+
+[node name="Right Vertical Ray" type="RayCast2D" parent="Rays" parent_id_path=PackedInt32Array(291469396) index="3" unique_id=1768382041]
+position = Vector2(11, 0)
+target_position = Vector2(0, 17)
+
+[node name="Searchlight" parent="." index="2" unique_id=229370074]
+material = SubResource("ShaderMaterial_f7wve")
+
+[node name="CollisionShape2D" parent="Contact Hitbox" parent_id_path=PackedInt32Array(2025154701) index="0" unique_id=194725216]
+position = Vector2(0, 0)
+shape = SubResource("RectangleShape2D_5xfs1")
+
+[node name="Sprites" type="Node2D" parent="." index="4" unique_id=425849754]
+
+[node name="Treads" type="Sprite2D" parent="Sprites" index="0" unique_id=764430120]
+position = Vector2(0, 6)
+texture = ExtResource("3_hyncy")
+vframes = 7
+
+[node name="Frame" type="Sprite2D" parent="Sprites" index="1" unique_id=191173613]
+texture_filter = 1
+scale = Vector2(-1, 1)
+texture = ExtResource("3_s1u4b")
+vframes = 4
+
+[node name="Eye Frame" type="Sprite2D" parent="Sprites/Frame" index="0" unique_id=233125844]
+clip_children = 2
+texture_filter = 1
+texture = ExtResource("3_s1u4b")
+vframes = 4
+frame = 1
+
+[node name="Eyes" type="Sprite2D" parent="Sprites/Frame/Eye Frame" index="0" unique_id=872261931]
+self_modulate = Color(0.28235295, 0.91764706, 0.85490197, 1)
+position = Vector2(-6, 3)
+texture = ExtResource("4_hyncy")
+hframes = 4
+vframes = 4
+frame = 4
+
+[node name="Hat 1" type="Sprite2D" parent="Sprites/Frame" index="1" unique_id=1505969252]
+texture_filter = 1
+position = Vector2(0, -4)
+texture = ExtResource("3_s1u4b")
+vframes = 4
+frame = 2
+
+[node name="Hat 2" type="Sprite2D" parent="Sprites/Frame" index="2" unique_id=788586908]
+texture_filter = 1
+position = Vector2(-5, -12)
+texture = ExtResource("3_s1u4b")
+vframes = 4
+frame = 3
+
+[node name="Treads Anim" type="AnimationPlayer" parent="Sprites" index="2" unique_id=744437136]
+libraries/ = SubResource("AnimationLibrary_a6mvl")
+autoplay = &"Brush Walk"
+speed_scale = 6.0
+
+[node name="Frame Bob Anim" type="AnimationPlayer" parent="Sprites" index="3" unique_id=1816492865]
+libraries/ = SubResource("AnimationLibrary_hyncy")
+autoplay = &"Frame Bob Horiz"
+speed_scale = 4.0

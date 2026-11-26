@@ -20,7 +20,7 @@ radius = 6.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_57qmd"]
 radius = 12.0
 
-[node name="Pluckman" type="CharacterBody2D" unique_id=581896398]
+[node name="Pluckman" type="CharacterBody2D" unique_id=581896398 groups=["Minion"]]
 collision_layer = 8
 script = ExtResource("1_e8lqk")
 

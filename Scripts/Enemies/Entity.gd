@@ -1,5 +1,9 @@
 class_name Entity
-extends RigidBody2D
+extends CharacterBody2D
+
+#General class for all entities, including enemies, and the player/pikmin?
+#Basically just handles health and death
+
 
 
 @export var maxHP : int = 10
@@ -12,10 +16,6 @@ var deletaOnDeath : bool = true
 func _ready() -> void:
 	pass # Replace with function body.
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
 	
 	
 func _updateHP(dir : int) :
@@ -25,7 +25,7 @@ func _updateHP(dir : int) :
 	if curHP > maxHP :
 		curHP = maxHP
 		
-	print(name + ", " + str(curHP))
+	print(name + ", HP = " + str(curHP))
 
 func _onDeath() :
 	if deletaOnDeath :
