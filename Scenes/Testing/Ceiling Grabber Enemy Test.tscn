@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://da03ips773j03"]
+[gd_scene format=3 uid="uid://c4j5v36kb2gr3"]
 
 [ext_resource type="Script" uid="uid://clan3ybkj78ra" path="res://Scripts/Enemies/Ceiling Grabber Enemy.gd" id="1_n2kom"]
 [ext_resource type="Texture2D" uid="uid://dx81vjmoh7yy4" path="res://Art/Sprites/Placeholders/Ground Enemy Placeholder.png" id="2_412vp"]

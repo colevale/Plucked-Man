@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://cdyhsia10pkgv"]
+[gd_scene format=3 uid="uid://gruk04331p67"]
 
 [ext_resource type="Script" uid="uid://c3wrns6wr5kdu" path="res://Scripts/Enemies/Flying Enemy.gd" id="1_v1upi"]
 [ext_resource type="Texture2D" uid="uid://uwl6xlu3eum3" path="res://Art/Sprites/Placeholders/Flying Enemy Placeholder.png" id="2_v1upi"]
@@ -20,13 +20,7 @@ size = Vector2(32, 20)
 gravity_scale = 0.0
 lock_rotation = true
 script = ExtResource("1_v1upi")
-idleSpeed = null
 attackSpeed = 50.0
-attackCooldownMax = null
-canAttackColor = null
-cantAttackColor = null
-contactDamage = null
-maxHP = null
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1271838719]
 texture_filter = 1

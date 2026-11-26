@@ -1,7 +1,15 @@
 class_name GroundEnemy
 extends Enemy
 
-#TODO : Make the vertical rays use groups
+#All the grounded enemies inherit this, including the tank, scrubber, and grabber
+#Handles common movement and animations between them
+
+#Movement is operated by 3 rays. End result if moving back and forth on a platform
+	#Horizontal one swaps the movement direction if it hits a wall
+	#Vertical ones detect the edge of a platform and swap direction at the ends
+	
+#Animation is just the treads. Makes sure its going the right direction
+
 
 var horizRay : RayCast2D
 var leftVertRay : RayCast2D
@@ -14,6 +22,9 @@ var horizRayBaseDir : Vector2
 var searchRayBaseDir : Vector2
 
 @export var customSearchlightBehavior : bool = false
+
+var treadsAnim : AnimationPlayer
+var treadsSpeed : float
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -31,8 +42,21 @@ func _ready() -> void:
 		searchRay.target_position = Vector2(searchRayBaseDir.x*-1, searchRayBaseDir.y)
 	
 	searchLight.scale.x = searchRay.target_position.length()/16
+
+	treadsAnim = $"Sprites/Treads Anim"
+	treadsSpeed = treadsAnim.speed_scale
 	
-	#apply_force(Vector2.RIGHT * delta * walkSpeed *direction)
+	
+
+func _process(delta: float) -> void:
+	var prevDir = direction
+	super._process(delta)
+	if prevDir != direction :
+		_newEyePosition()
+	if !isAttacking :
+		treadsAnim.speed_scale = treadsSpeed * direction
+
+#MOVEMENT_____________________________________________________________________-
 func _move(delta : float) :
 	super._move(delta)
 	#apply_force(Vector2.RIGHT * delta * walkSpeed * direction)
@@ -51,7 +75,16 @@ func _move(delta : float) :
 	if !customSearchlightBehavior :
 		searchLight.flip_h = direction < 0
 			
+			
+			
+			
+			
+			
 
 
-		
-		
+
+#Animation_________________________________________________________________
+func _newEyePosition() :
+	super._newEyePosition()
+	if direction < 0 :
+		eyesCurEnd.x *= -1

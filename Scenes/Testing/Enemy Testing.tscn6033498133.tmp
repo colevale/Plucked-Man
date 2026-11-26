@@ -1,0 +1,58 @@
+[gd_scene format=3 uid="uid://dkiu0x42oub7s"]
+
+[ext_resource type="PackedScene" uid="uid://dvdoa4ffbr4of" path="res://Scenes/Testing/Box.tscn" id="2_pvio2"]
+[ext_resource type="PackedScene" uid="uid://bp14tv1jqivov" path="res://Scenes/Enemies/Fline Mine.tscn" id="4_b405d"]
+[ext_resource type="PackedScene" uid="uid://bfdvvj85hdu2i" path="res://Scenes/Testing/Player.tscn" id="4_q2mww"]
+[ext_resource type="PackedScene" uid="uid://c174nq0003hbp" path="res://Scenes/Enemies/Scrubot.tscn" id="6_pvio2"]
+[ext_resource type="PackedScene" uid="uid://d06ef46xjkix6" path="res://Scenes/Enemies/Grabber.tscn" id="6_t8efy"]
+
+[node name="EnemyTesting" type="Node2D" unique_id=607693179]
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=487013643]
+zoom = Vector2(4, 4)
+
+[node name="Box" parent="." unique_id=328725460 instance=ExtResource("2_pvio2")]
+position = Vector2(0, 39)
+
+[node name="Box6" parent="." unique_id=1584940170 instance=ExtResource("2_pvio2")]
+position = Vector2(-32, 39)
+
+[node name="Box3" parent="." unique_id=1653827206 instance=ExtResource("2_pvio2")]
+position = Vector2(32, 39)
+
+[node name="Box2" parent="." unique_id=1801872198 instance=ExtResource("2_pvio2")]
+position = Vector2(-87, -85)
+
+[node name="Box9" parent="." unique_id=1377665103 instance=ExtResource("2_pvio2")]
+position = Vector2(-119, -85)
+
+[node name="Box10" parent="." unique_id=803085485 instance=ExtResource("2_pvio2")]
+position = Vector2(-55, -85)
+
+[node name="Box4" parent="." unique_id=691507996 instance=ExtResource("2_pvio2")]
+position = Vector2(45, -71)
+
+[node name="Box8" parent="." unique_id=181297162 instance=ExtResource("2_pvio2")]
+position = Vector2(65, 62)
+
+[node name="Box5" parent="." unique_id=481976442 instance=ExtResource("2_pvio2")]
+position = Vector2(76, -45)
+
+[node name="Box7" parent="." unique_id=1644038858 instance=ExtResource("2_pvio2")]
+position = Vector2(100, 20)
+
+[node name="Player" parent="." unique_id=2059546600 instance=ExtResource("4_q2mww")]
+position = Vector2(-31, 4)
+
+[node name="Fline Mine" parent="." unique_id=202463446 instance=ExtResource("4_b405d")]
+position = Vector2(108, -21)
+mass = 0.5
+thrusterRotateSpeed = -1.5
+
+[node name="Scrubot" parent="." unique_id=1766134704 instance=ExtResource("6_pvio2")]
+position = Vector2(5, 15)
+attackSpeed = 4.0
+attackCooldownMax = 2.0
+
+[node name="Grabber" parent="." unique_id=118655659 instance=ExtResource("6_t8efy")]
+position = Vector2(-119, -70)

@@ -1,7 +1,7 @@
 class_name Projectile
 extends Node2D
 
-
+#Very basic projectile. Linearly goes a direction, and eventually deletes itself
 
 @export var lifetime : float = 20
 var direction : Vector2

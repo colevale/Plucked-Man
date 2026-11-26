@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://dvdoa4ffbr4of" path="res://Scenes/Testing/Box.tscn" id="2_hnsfp"]
 [ext_resource type="PackedScene" uid="uid://cdyhsia10pkgv" path="res://Scenes/Enemies/Flying Enemy.tscn" id="3_mfd1o"]
 [ext_resource type="PackedScene" uid="uid://bfdvvj85hdu2i" path="res://Scenes/Testing/Player.tscn" id="4_ivv7r"]
-[ext_resource type="PackedScene" uid="uid://da03ips773j03" path="res://Scenes/Enemies/Ceiling Grabber Enemy.tscn" id="5_2w6wm"]
+[ext_resource type="PackedScene" uid="uid://da03ips773j03" path="res://Scenes/Testing/Ceiling Grabber Enemy Test.tscn" id="5_2w6wm"]
 [ext_resource type="PackedScene" uid="uid://7s18matqsehh" path="res://Scenes/Enemies/Shooting Enemy.tscn" id="6_mwgwo"]
 
 [node name="Enemy Testing" type="Node2D" unique_id=610914723]

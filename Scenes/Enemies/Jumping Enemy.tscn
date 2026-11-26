@@ -1,7 +1,7 @@
-[gd_scene format=3 uid="uid://b3lhmvmw4qixk"]
+[gd_scene format=3 uid="uid://cp3lshuinxob7"]
 
 [ext_resource type="Texture2D" uid="uid://dx81vjmoh7yy4" path="res://Art/Sprites/Placeholders/Ground Enemy Placeholder.png" id="1_20ndo"]
-[ext_resource type="Script" uid="uid://f026c1rwcnr4" path="res://Scripts/Enemies/Jumping Enemy.gd" id="1_msax0"]
+[ext_resource type="Script" uid="uid://f026c1rwcnr4" path="res://Scripts/Enemies/Charging Enemy.gd" id="1_msax0"]
 [ext_resource type="Shader" uid="uid://bwnwf4ovj11kg" path="res://Shaders/Searchlight.tres" id="3_lsdvy"]
 [ext_resource type="Texture2D" uid="uid://behig4ywdgxra" path="res://Art/Sprites/Tiles/Tile 1.png" id="4_k371g"]
 

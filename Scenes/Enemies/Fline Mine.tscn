@@ -1,0 +1,169 @@
+[gd_scene format=3 uid="uid://bp14tv1jqivov"]
+
+[ext_resource type="PackedScene" uid="uid://blc5ag1eshpmt" path="res://Scenes/Enemies/Basic Enemy.tscn" id="1_gb2v4"]
+[ext_resource type="Script" uid="uid://c3wrns6wr5kdu" path="res://Scripts/Enemies/Flying Enemy.gd" id="2_bhdhs"]
+[ext_resource type="Shader" uid="uid://bwnwf4ovj11kg" path="res://Shaders/Searchlight.tres" id="2_mjcvi"]
+[ext_resource type="Script" uid="uid://dehmsb82agpuf" path="res://Scripts/Enemies/Fline Thruster.gd" id="3_58eoa"]
+[ext_resource type="Texture2D" uid="uid://cwyddpmqw5mt5" path="res://Art/Sprites/Enemies/Fline mine.png" id="3_gksi4"]
+[ext_resource type="Texture2D" uid="uid://bu4t56fo04lq5" path="res://Art/Sprites/Enemies/Bot Eyes.png" id="4_bhdhs"]
+[ext_resource type="Shader" uid="uid://ci4oupjckgy4s" path="res://Shaders/Fline Thruster.tres" id="6_mv482"]
+[ext_resource type="Texture2D" uid="uid://behig4ywdgxra" path="res://Art/Sprites/Tiles/Tile 1.png" id="7_58eoa"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_yf5fn"]
+radius = 11.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_g4v7s"]
+shader = ExtResource("6_mv482")
+shader_parameter/Show_Radius = 0.13
+shader_parameter/Show_Offset = Vector2(0.5, 0.5)
+shader_parameter/Start_Offset = 0.35
+shader_parameter/Roundng = Vector2(32, 32)
+shader_parameter/Hide_Offset = Vector2(0.45, 0.5)
+shader_parameter/Hide_Radius = 0.3
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_58eoa"]
+resource_local_to_scene = true
+shader = ExtResource("2_mjcvi")
+shader_parameter/Color = Color(0.113725, 1, 0.117647, 1)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_57qmd"]
+radius = 12.010412
+
+[node name="Fline Mine" unique_id=118655659 instance=ExtResource("1_gb2v4")]
+script = ExtResource("2_bhdhs")
+idleSpeed = 100.0
+thrusterRotateSpeed = -2.0
+eyeRow = 2
+eyesNeutralPos = Vector2(0, 2)
+eyesSidePos = Vector2(0, 4)
+
+[node name="CollisionShape2D" parent="." index="0" unique_id=271179105]
+position = Vector2(0, 0)
+shape = SubResource("CircleShape2D_yf5fn")
+
+[node name="Move Rays" type="Node2D" parent="Rays" parent_id_path=PackedInt32Array(291469396) index="1" unique_id=468222193]
+
+[node name="Right Ray" type="RayCast2D" parent="Rays/Move Rays" index="0" unique_id=818916835]
+target_position = Vector2(30, 0)
+script = ExtResource("3_58eoa")
+
+[node name="Thruster" type="Sprite2D" parent="Rays/Move Rays/Right Ray" index="0" unique_id=614662653]
+position = Vector2(13, 2.272992e-06)
+rotation = 1.5707964
+texture = ExtResource("3_gksi4")
+vframes = 4
+frame = 3
+
+[node name="Dust" type="Sprite2D" parent="Rays/Move Rays/Right Ray/Thruster" index="0" unique_id=160373508]
+show_behind_parent = true
+material = SubResource("ShaderMaterial_g4v7s")
+position = Vector2(-2.797529e-06, -12)
+rotation = -1.5707964
+texture = ExtResource("7_58eoa")
+
+[node name="Inside" type="Sprite2D" parent="Rays/Move Rays/Right Ray/Thruster" index="1" unique_id=56864977]
+self_modulate = Color(1, 0.56078434, 0.7490196, 1)
+clip_children = 2
+texture = ExtResource("3_gksi4")
+vframes = 4
+frame = 2
+
+[node name="Left Ray" type="RayCast2D" parent="Rays/Move Rays" index="1" unique_id=1931288282]
+target_position = Vector2(-30, 0)
+script = ExtResource("3_58eoa")
+
+[node name="Thruster" type="Sprite2D" parent="Rays/Move Rays/Left Ray" index="0" unique_id=1937296544]
+position = Vector2(-13, -2.2729917e-06)
+rotation = -1.5707964
+texture = ExtResource("3_gksi4")
+vframes = 4
+frame = 3
+
+[node name="Dust" type="Sprite2D" parent="Rays/Move Rays/Left Ray/Thruster" index="0" unique_id=2085698308]
+show_behind_parent = true
+material = SubResource("ShaderMaterial_g4v7s")
+position = Vector2(-2.797529e-06, -12)
+rotation = -1.5707964
+texture = ExtResource("7_58eoa")
+
+[node name="Inside" type="Sprite2D" parent="Rays/Move Rays/Left Ray/Thruster" index="1" unique_id=308030999]
+self_modulate = Color(1, 0.56078434, 0.7490196, 1)
+clip_children = 2
+texture = ExtResource("3_gksi4")
+vframes = 4
+frame = 2
+
+[node name="Up Ray" type="RayCast2D" parent="Rays/Move Rays" index="2" unique_id=997653205]
+target_position = Vector2(0, -30)
+script = ExtResource("3_58eoa")
+
+[node name="Thruster" type="Sprite2D" parent="Rays/Move Rays/Up Ray" index="0" unique_id=1653085252]
+position = Vector2(2.272992e-06, -13)
+texture = ExtResource("3_gksi4")
+vframes = 4
+frame = 3
+
+[node name="Dust" type="Sprite2D" parent="Rays/Move Rays/Up Ray/Thruster" index="0" unique_id=1977470612]
+show_behind_parent = true
+material = SubResource("ShaderMaterial_g4v7s")
+position = Vector2(-2.797529e-06, -12)
+rotation = -1.5707964
+texture = ExtResource("7_58eoa")
+
+[node name="Inside" type="Sprite2D" parent="Rays/Move Rays/Up Ray/Thruster" index="1" unique_id=2002052741]
+self_modulate = Color(1, 0.56078434, 0.7490196, 1)
+clip_children = 2
+texture = ExtResource("3_gksi4")
+vframes = 4
+frame = 2
+
+[node name="Down Ray" type="RayCast2D" parent="Rays/Move Rays" index="3" unique_id=1720906939]
+target_position = Vector2(0, 30)
+script = ExtResource("3_58eoa")
+
+[node name="Thruster" type="Sprite2D" parent="Rays/Move Rays/Down Ray" index="0" unique_id=1823692047]
+position = Vector2(-2.272992e-06, 13)
+rotation = -3.1415925
+texture = ExtResource("3_gksi4")
+vframes = 4
+frame = 3
+
+[node name="Dust" type="Sprite2D" parent="Rays/Move Rays/Down Ray/Thruster" index="0" unique_id=1572874936]
+show_behind_parent = true
+material = SubResource("ShaderMaterial_g4v7s")
+position = Vector2(-2.7975293e-06, -12)
+rotation = -1.5707964
+texture = ExtResource("7_58eoa")
+
+[node name="Inside" type="Sprite2D" parent="Rays/Move Rays/Down Ray/Thruster" index="1" unique_id=164100567]
+self_modulate = Color(1, 0.56078434, 0.7490196, 1)
+clip_children = 2
+texture = ExtResource("3_gksi4")
+vframes = 4
+frame = 2
+
+[node name="Searchlight" parent="." index="2" unique_id=229370074]
+material = SubResource("ShaderMaterial_58eoa")
+
+[node name="CollisionShape2D" parent="Contact Hitbox" parent_id_path=PackedInt32Array(2025154701) index="0" unique_id=194725216]
+position = Vector2(0, 0)
+shape = SubResource("CircleShape2D_57qmd")
+
+[node name="Sprites" type="Node2D" parent="." index="4" unique_id=2050221141]
+
+[node name="Frame" type="Sprite2D" parent="Sprites" index="0" unique_id=1439850905]
+texture = ExtResource("3_gksi4")
+vframes = 4
+
+[node name="Eye Frame" type="Sprite2D" parent="Sprites/Frame" index="0" unique_id=45341416]
+clip_children = 2
+texture = ExtResource("3_gksi4")
+vframes = 4
+frame = 1
+
+[node name="Eyes" type="Sprite2D" parent="Sprites/Frame/Eye Frame" index="0" unique_id=1065932503]
+self_modulate = Color(0.8039216, 0.1254902, 0.27058825, 1)
+texture = ExtResource("4_bhdhs")
+hframes = 4
+vframes = 4
+frame = 8
