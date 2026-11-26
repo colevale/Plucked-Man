@@ -75,7 +75,7 @@ func _physics_process(delta: float) -> void:
 		var target_index = (i+1) * spacing
 		if target_index < pluckmanPos_hist.size():
 			pluckmanArray[i].targetPos = pluckmanPos_hist[target_index]
-		
+			
 		# function to make sure that pluckmen know if player is grounded or not
 		if not is_on_floor():
 			pluckmanArray[i].change_playerGrounded(false)
@@ -113,6 +113,17 @@ func _on_room_detector_area_entered(area: Area2D) -> void:
 # Add Pluckman Function
 func add_pluckman(newPluckman: Node2D) -> void:
 	pluckmanArray.append(newPluckman)
+	
+func remove_pluckman(pluckmanToRemove: Node2D) -> void:
+	for i in range(pluckmanAmount):
+		if pluckmanArray.size() > 0 and pluckmanToRemove == pluckmanArray[i]:
+			pluckmanArray.remove_at(i)
+			print("found pluckman")
+			break
+		elif thrownPluckmen.size() > 0 and pluckmanToRemove == thrownPluckmen[i]:
+			thrownPluckmen.remove_at(i)
+			print("found pluckman")
+			break
 
 func addMorePluckman():
 	var currentPluckmenHeld = pluckmanArray.size() + thrownPluckmen.size()
@@ -120,3 +131,17 @@ func addMorePluckman():
 		return true
 	else:
 		return false
+
+func die():
+	# try to find a way to set reference pluckmen back to idle and to remove the player reference
+	
+	if pluckmanArray.size() > 0:
+		for i in range(pluckmanArray.size()):
+			pluckmanArray[i].change_state(0)
+			pluckmanArray[i].remove_player()
+	elif thrownPluckmen.size() > 0:
+		for i in range(thrownPluckmen.size()):
+			thrownPluckmen[i].change_state(0)
+			thrownPluckmen[i].remove_player()
+	
+	queue_free()

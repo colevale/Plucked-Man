@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Plucked Man"
-run/main_scene="uid://bhxwxy6bldhaj"
+run/main_scene="uid://c53lq3ciwtokn"
 config/features=PackedStringArray("4.7", "Forward Plus")
 config/icon="res://icon.svg"
 

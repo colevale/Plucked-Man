@@ -21,7 +21,7 @@ radius = 9.0
 height = 26.0
 
 [node name="Player" type="CharacterBody2D" unique_id=860349107 groups=["Player"]]
-collision_layer = 9
+collision_layer = 2057
 script = ExtResource("1_nuuxw")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=64589258]

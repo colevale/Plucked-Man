@@ -9,7 +9,6 @@
 [ext_resource type="PackedScene" uid="uid://dixyv8s0jl1ml" path="res://Scenes/Player Objects/Pluckman.tscn" id="7_iiopb"]
 [ext_resource type="PackedScene" uid="uid://b5msxrojcfplj" path="res://Scenes/Level Objects/Barrier.tscn" id="8_fgef6"]
 [ext_resource type="PackedScene" uid="uid://cy31bsfpf6uhl" path="res://Scenes/Level Objects/Button.tscn" id="9_e80ih"]
-[ext_resource type="PackedScene" uid="uid://bifg0kc2q2r0o" path="res://Scenes/Level Objects/Lever.tscn" id="10_fgef6"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_4ayqm"]
 texture = ExtResource("4_iiopb")
@@ -114,7 +113,7 @@ camera = NodePath("../FollowCamera")
 [node name="Node" type="Node" parent="." unique_id=218290953]
 
 [node name="Room1" type="TileMapLayer" parent="Node" unique_id=1299990806]
-tile_map_data = PackedByteArray("AAALAP3/AgAAAAAAAAALAPz/AgAAAAAAAAALAPv/AgAAAAAAAAALAPr/AgAAAAAAAAALAPn/AgAAAAAAAAALAPj/AgAAAAAAAAALAPf/AgAAAAAAAAAKAPf/AgAAAAAAAAAJAPf/AgAAAAAAAAAIAPf/AgAAAAAAAAAHAPf/AgAAAAAAAAAGAPf/AgAAAAAAAAAFAPf/AgAAAAAAAAAEAPf/AgAAAAAAAAADAPf/AgAAAAAAAAACAPf/AgAAAAAAAAABAPf/AgAAAAAAAAABAPb/AgAAAAAAAAABAPX/AgAAAAAAAAABAPT/AgAAAAAAAAABAPP/AgAAAAAAAAAAAPP/AgAAAAAAAAD///P/AgAAAAAAAAD+//P/AgAAAAAAAAD9//P/AgAAAAAAAAD8//P/AgAAAAAAAAD7//P/AgAAAAAAAAD6//P/AgAAAAAAAAD5//P/AgAAAAAAAAD4//P/AgAAAAAAAAD3//P/AgAAAAAAAAD3//T/AgAAAAAAAAD3//X/AgAAAAAAAAD3//b/AgAAAAAAAAD3//f/AgAAAAAAAAD3//j/AgAAAAAAAAD3//n/AgAAAAAAAAD3//r/AgAAAAAAAAD3//v/AgAAAAAAAAD3//z/AgAAAAAAAAD3//3/AgAAAAAAAAD3//7/AgAAAAAAAAD3////AgAAAAAAAAD3/wAAAgAAAAAAAAD3/wEAAgAAAAAAAAD4/wEAAgAAAAAAAAD5/wEAAgAAAAAAAAD6/wEAAgAAAAAAAAD7/wEAAgAAAAAAAAD8/wEAAgAAAAAAAAD9/wEAAgAAAAAAAAD+/wEAAgAAAAAAAAD//wEAAgAAAAAAAAAAAAEAAgAAAAAAAAABAAEAAgAAAAAAAAACAAEAAgAAAAAAAAADAAEAAgAAAAAAAAAEAAEAAgAAAAAAAAAFAAEAAgAAAAAAAAAGAAEAAgAAAAAAAAAHAAEAAgAAAAAAAAAIAAEAAgAAAAAAAAAJAAEAAgAAAAAAAAAKAAEAAgAAAAAAAAALAP7/AgAAAAAAAAALAAEAAgAAAAAAAAA=")
+tile_map_data = PackedByteArray("AAALAP3/AgAAAAAAAAALAPz/AgAAAAAAAAALAPv/AgAAAAAAAAALAPr/AgAAAAAAAAALAPn/AgAAAAAAAAALAPj/AgAAAAAAAAALAPf/AgAAAAAAAAAKAPf/AgAAAAAAAAAJAPf/AgAAAAAAAAAIAPf/AgAAAAAAAAAHAPf/AgAAAAAAAAAGAPf/AgAAAAAAAAAFAPf/AgAAAAAAAAAEAPf/AgAAAAAAAAADAPf/AgAAAAAAAAACAPf/AgAAAAAAAAABAPf/AgAAAAAAAAABAPb/AgAAAAAAAAABAPX/AgAAAAAAAAABAPT/AgAAAAAAAAABAPP/AgAAAAAAAAAAAPP/AgAAAAAAAAD///P/AgAAAAAAAAD+//P/AgAAAAAAAAD9//P/AgAAAAAAAAD8//P/AgAAAAAAAAD7//P/AgAAAAAAAAD6//P/AgAAAAAAAAD5//P/AgAAAAAAAAD4//P/AgAAAAAAAAD3//P/AgAAAAAAAAD3//T/AgAAAAAAAAD3//X/AgAAAAAAAAD3//b/AgAAAAAAAAD3//f/AgAAAAAAAAD3//j/AgAAAAAAAAD3//n/AgAAAAAAAAD3//r/AgAAAAAAAAD3//v/AgAAAAAAAAD3//z/AgAAAAAAAAD3//3/AgAAAAAAAAD3//7/AgAAAAAAAAD3////AgAAAAAAAAD3/wAAAgAAAAAAAAD3/wEAAgAAAAAAAAD4/wEAAgAAAAAAAAD5/wEAAgAAAAAAAAD6/wEAAgAAAAAAAAD7/wEAAgAAAAAAAAD8/wEAAgAAAAAAAAD9/wEAAgAAAAAAAAD+/wEAAgAAAAAAAAD//wEAAgAAAAAAAAAAAAEAAgAAAAAAAAABAAEAAgAAAAAAAAAFAAEAAgAAAAAAAAAGAAEAAgAAAAAAAAAHAAEAAgAAAAAAAAAIAAEAAgAAAAAAAAAJAAEAAgAAAAAAAAAKAAEAAgAAAAAAAAALAP7/AgAAAAAAAAALAAEAAgAAAAAAAAACAAEAAgAAAAAAAAADAAEAAgAAAAAAAAAEAAEAAgAAAAAAAAA=")
 tile_set = SubResource("TileSet_g4v7s")
 
 [node name="Background" type="TileMapLayer" parent="Node/Room1" unique_id=1498019181]
@@ -156,14 +155,6 @@ collision_mask = 0
 libraries/ = SubResource("AnimationLibrary_iiopb")
 autoplay = &"Move_Up_Room1"
 
-[node name="Pluckmen" type="Node" parent="Node/Room1" unique_id=1861492352]
-
-[node name="Pluckman" parent="Node/Room1/Pluckmen" unique_id=581896398 instance=ExtResource("7_iiopb")]
-position = Vector2(-68, -292)
-
-[node name="Pluckman2" parent="Node/Room1/Pluckmen" unique_id=1542245857 instance=ExtResource("7_iiopb")]
-position = Vector2(145, 20)
-
 [node name="ButtonsAndBarriers" type="Node" parent="Node/Room1" unique_id=1720026586]
 
 [node name="Barrier" parent="Node/Room1/ButtonsAndBarriers" unique_id=2019439973 instance=ExtResource("8_fgef6")]
@@ -180,6 +171,8 @@ collision_mask = 0
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Node/Room1/Room1Area" unique_id=2023631546]
 polygon = PackedVector2Array(-256, -384, 32, -384, 32, -256, 352, -256, 352, 32, -256, 32)
 
+[node name="Pluckmen" type="Node" parent="Node/Room1" unique_id=308148984]
+
 [node name="Room2" type="TileMapLayer" parent="Node" unique_id=800755901]
 tile_map_data = PackedByteArray("AAAMAP7/AgAAAAAAAAANAP7/AgAAAAAAAAANAP3/AgAAAAAAAAANAPz/AgAAAAAAAAANAPv/AgAAAAAAAAANAPr/AgAAAAAAAAANAPn/AgAAAAAAAAAOAPn/AgAAAAAAAAAPAPn/AgAAAAAAAAAQAPn/AgAAAAAAAAARAPn/AgAAAAAAAAASAPn/AgAAAAAAAAATAPn/AgAAAAAAAAAUAPn/AgAAAAAAAAAVAPn/AgAAAAAAAAAWAPn/AgAAAAAAAAAXAPn/AgAAAAAAAAAYAPn/AgAAAAAAAAAZAPn/AgAAAAAAAAAaAPn/AgAAAAAAAAAbAPn/AgAAAAAAAAAcAPn/AgAAAAAAAAAcAPr/AgAAAAAAAAAcAPv/AgAAAAAAAAAcAPz/AgAAAAAAAAAcAP3/AgAAAAAAAAAcAP7/AgAAAAAAAAAcAP//AgAAAAAAAAAcAAAAAgAAAAAAAAAcAAEAAgAAAAAAAAAMAAEAAgAAAAAAAAANAAEAAgAAAAAAAAAOAAEAAgAAAAAAAAAPAAEAAgAAAAAAAAAQAAEAAgAAAAAAAAARAAEAAgAAAAAAAAASAAEAAgAAAAAAAAATAAEAAgAAAAAAAAAUAAEAAgAAAAAAAAAVAAEAAgAAAAAAAAAWAAEAAgAAAAAAAAAWAAIAAgAAAAAAAAAWAAMAAgAAAAAAAAAWAAQAAgAAAAAAAAAWAAUAAgAAAAAAAAAXAAUAAgAAAAAAAAAYAAUAAgAAAAAAAAAZAAUAAgAAAAAAAAAaAAUAAgAAAAAAAAAbAAUAAgAAAAAAAAAcAAUAAgAAAAAAAAAcAAQAAgAAAAAAAAAcAAMAAgAAAAAAAAAcAAIAAgAAAAAAAAA=")
 tile_set = SubResource("TileSet_g4v7s")
@@ -193,9 +186,23 @@ tile_set = SubResource("TileSet_yf5fn")
 
 [node name="Pluckman" parent="Node/Room2/Pluckmen" unique_id=542685287 instance=ExtResource("7_iiopb")]
 position = Vector2(655, 18)
+pluckman_state = 0
+follow_speed = 200.0
+jump_velocity = -400.0
+jump_threshold = 50.0
+friction = 1200.0
+spriteRadius = 24.0
+moveAreaRadius = 200.0
 
 [node name="Pluckman2" parent="Node/Room2/Pluckmen" unique_id=1534858520 instance=ExtResource("7_iiopb")]
 position = Vector2(529, 18)
+pluckman_state = 0
+follow_speed = 200.0
+jump_velocity = -400.0
+jump_threshold = 50.0
+friction = 1200.0
+spriteRadius = 24.0
+moveAreaRadius = 200.0
 
 [node name="ButtonsAndBarriers" type="Node" parent="Node/Room2" unique_id=604767974]
 
@@ -213,12 +220,3 @@ collision_mask = 0
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Node/Room2/Room2Area" unique_id=2043971061]
 polygon = PackedVector2Array(355, -32, 448, -32, 448, -192, 896, -192, 896, 160, 736, 160, 736, 32, 354, 33)
-
-[node name="Lever" parent="." unique_id=1844499029 node_paths=PackedStringArray("barrier") instance=ExtResource("10_fgef6")]
-position = Vector2(241, 33)
-barrier = NodePath("../Barrier")
-
-[node name="Barrier" parent="." unique_id=460490677 instance=ExtResource("8_fgef6")]
-z_index = 2
-position = Vector2(162, -162)
-tile_map_data = PackedByteArray("AAAAAAEAAAAAAAAAAAABAAEAAAAAAAAAAAA=")

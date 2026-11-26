@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://cc7quy4p36hry"]
+
+[ext_resource type="Script" uid="uid://wy3c8pxden0b" path="res://Scripts/Level Objects/Pluckman Spawner.gd" id="1_qf4g5"]
+
+[node name="Pluckman Spawner" type="Marker2D" unique_id=1331374000]
+script = ExtResource("1_qf4g5")
