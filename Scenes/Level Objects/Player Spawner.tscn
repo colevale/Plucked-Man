@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://cdj2whrd01lol"]
+
+[ext_resource type="Script" uid="uid://nk5fltp3xc5w" path="res://Scripts/Level Objects/Player Spawner.gd" id="1_dimnv"]
+[ext_resource type="PackedScene" uid="uid://cclg2aqoigr26" path="res://Scenes/Player Objects/Player.tscn" id="2_gfklm"]
+
+[node name="Player Spawner" type="Marker2D" unique_id=940676347]
+script = ExtResource("1_dimnv")
+object_to_spawn = ExtResource("2_gfklm")

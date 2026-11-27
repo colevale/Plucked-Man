@@ -8,8 +8,10 @@ const JUMP_VELOCITY = -400.0
 @onready var throw_point: Marker2D = $ThrowPoint
 
 # Level Camera Variables
-# Be sure to use camera in Player Object Script
+# Be sure to use camera in Player Object Script, OPTIONAL - in end game can make an onready if we are using one giant scene, it's just here becuase of testing
 @export var camera: Camera2D
+
+@export var curr_spawn: Marker2D
 
 # Pluckman Variables
 @export var pluckmanAmount: int = 3
@@ -24,9 +26,6 @@ var thrownPluckmen: Array[Node2D] = []
 var heldPluckman: Node2D
 var holdingPluckman: bool = false
 var facingDirection: int = 1 #1 or -1 depending on direction
-
-func _ready() -> void:
-	pass
 
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
@@ -109,6 +108,12 @@ func _physics_process(delta: float) -> void:
 func _on_room_detector_area_entered(area: Area2D) -> void:
 	var collision_room = area.get_parent()
 	camera.change_room(collision_room)
+	var spawner = collision_room.find_child("Player Spawner", false, true)
+	if spawner:
+		if curr_spawn != null:
+			curr_spawn.deactivate()
+		curr_spawn = spawner
+		curr_spawn.set_active()
 
 # Add Pluckman Function
 func add_pluckman(newPluckman: Node2D) -> void:
@@ -145,3 +150,7 @@ func die():
 			thrownPluckmen[i].remove_player()
 	
 	queue_free()
+
+# OPTIONAL if camera will always be in final game just set it as an onready instead
+func get_camera(currCamera: Node2D) -> void:
+	camera = currCamera

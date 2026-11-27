@@ -83,8 +83,6 @@ func throwing_commands(delta: float):
 			change_state(3)
 			controlable = true
 
-
-			
 func control_commands(delta: float):
 	if controlable == true:
 		if Input.is_action_just_pressed("click"):

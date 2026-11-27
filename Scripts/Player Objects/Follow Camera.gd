@@ -23,6 +23,14 @@ func change_room(newRoom: TileMapLayer):
 	room = newRoom
 	setup_camera_limits()
 
+func givePlayer():
+	if player == null:
+		return null
+	return player
+
+func updatePlayer(newPlayer: Node2D):
+	player = newPlayer
+
 # Setups the Cameras Limits
 func setup_camera_limits():
 	# Gathers information to create limits
