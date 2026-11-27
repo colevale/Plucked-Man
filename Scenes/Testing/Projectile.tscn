@@ -1,10 +1,10 @@
 [gd_scene format=3 uid="uid://dulu570oavmct"]
 
-[ext_resource type="Texture2D" uid="uid://d0bx8bmpbibyi" path="res://Art/Sprites/Placeholders/Pluckman Placeholder.png" id="1_k1cl8"]
+[ext_resource type="Texture2D" uid="uid://bybx1til77nfo" path="res://Art/Sprites/Enemies/Projectile.png" id="2_jkk5y"]
 [ext_resource type="Script" uid="uid://rdt5rfuavd4u" path="res://Scripts/Testing/Projectile.gd" id="2_y0kec"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_g4v7s"]
-radius = 14.035668
+radius = 4.0
 
 [node name="Projectile" type="Area2D" unique_id=1940531558]
 texture_filter = 1
@@ -12,7 +12,7 @@ script = ExtResource("2_y0kec")
 speed = 40.0
 
 [node name="Sprite" type="Sprite2D" parent="." unique_id=1129957165]
-texture = ExtResource("1_k1cl8")
+texture = ExtResource("2_jkk5y")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1038342843]
 shape = SubResource("CircleShape2D_g4v7s")

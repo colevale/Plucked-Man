@@ -1,0 +1,42 @@
+[gd_scene format=3 uid="uid://blc5ag1eshpmt"]
+
+[ext_resource type="Script" uid="uid://cyld6i8ionrqo" path="res://Scripts/Enemies/Enemy.gd" id="1_cqxn6"]
+[ext_resource type="Shader" uid="uid://bwnwf4ovj11kg" path="res://Shaders/Searchlight.tres" id="2_22304"]
+[ext_resource type="Texture2D" uid="uid://behig4ywdgxra" path="res://Art/Sprites/Tiles/Tile 1.png" id="3_v4n5w"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sp22y"]
+size = Vector2(26, 25)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8olfl"]
+resource_local_to_scene = true
+shader = ExtResource("2_22304")
+shader_parameter/Color = Color(0.113725, 1, 0.117647, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_aolug"]
+size = Vector2(38, 27)
+
+[node name="BasicEnemy" type="CharacterBody2D" unique_id=272973410]
+floor_block_on_wall = false
+script = ExtResource("1_cqxn6")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=271179105]
+position = Vector2(0, 2.5)
+shape = SubResource("RectangleShape2D_sp22y")
+
+[node name="Rays" type="Node2D" parent="." unique_id=291469396]
+
+[node name="Search Ray" type="RayCast2D" parent="Rays" unique_id=274638612]
+target_position = Vector2(70, 0)
+
+[node name="Searchlight" type="Sprite2D" parent="." unique_id=229370074]
+material = SubResource("ShaderMaterial_8olfl")
+scale = Vector2(5, 1)
+texture = ExtResource("3_v4n5w")
+
+[node name="Contact Hitbox" type="Area2D" parent="." unique_id=2025154701]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Contact Hitbox" unique_id=194725216]
+position = Vector2(0, 1.5)
+shape = SubResource("RectangleShape2D_aolug")
+
+[connection signal="body_entered" from="Contact Hitbox" to="." method="_on_contact_hitbox_body_entered"]

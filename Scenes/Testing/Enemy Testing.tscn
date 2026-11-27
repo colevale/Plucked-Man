@@ -1,11 +1,10 @@
 [gd_scene format=3 uid="uid://dkiu0x42oub7s"]
 
-[ext_resource type="PackedScene" uid="uid://b3lhmvmw4qixk" path="res://Scenes/Enemies/Jumping Enemy.tscn" id="1_t8efy"]
 [ext_resource type="PackedScene" uid="uid://dvdoa4ffbr4of" path="res://Scenes/Testing/Box.tscn" id="2_pvio2"]
-[ext_resource type="PackedScene" uid="uid://cdyhsia10pkgv" path="res://Scenes/Enemies/Flying Enemy.tscn" id="3_tseap"]
-[ext_resource type="PackedScene" uid="uid://bfdvvj85hdu2i" path="res://Scenes/Testing/Player.tscn" id="4_q2mww"]
-[ext_resource type="PackedScene" uid="uid://da03ips773j03" path="res://Scenes/Enemies/Ceiling Grabber Enemy.tscn" id="5_fs0qc"]
-[ext_resource type="PackedScene" uid="uid://7s18matqsehh" path="res://Scenes/Enemies/Shooting Enemy.tscn" id="6_53l5r"]
+[ext_resource type="PackedScene" uid="uid://bp14tv1jqivov" path="res://Scenes/Enemies/Fline Mine.tscn" id="4_b405d"]
+[ext_resource type="PackedScene" uid="uid://br5ujcjm6x6v5" path="res://Scenes/Enemies/Tankle.tscn" id="5_j24i1"]
+[ext_resource type="PackedScene" uid="uid://c174nq0003hbp" path="res://Scenes/Enemies/Scrubot.tscn" id="6_pvio2"]
+[ext_resource type="PackedScene" uid="uid://d06ef46xjkix6" path="res://Scenes/Enemies/Grabber.tscn" id="6_t8efy"]
 
 [node name="EnemyTesting" type="Node2D" unique_id=607693179]
 
@@ -39,34 +38,27 @@ position = Vector2(65, 62)
 [node name="Box5" parent="." unique_id=481976442 instance=ExtResource("2_pvio2")]
 position = Vector2(76, -45)
 
+[node name="Box11" parent="." unique_id=1149943380 instance=ExtResource("2_pvio2")]
+position = Vector2(-121, 45)
+
+[node name="Box12" parent="." unique_id=957667252 instance=ExtResource("2_pvio2")]
+position = Vector2(-89, 45)
+
 [node name="Box7" parent="." unique_id=1644038858 instance=ExtResource("2_pvio2")]
 position = Vector2(100, 20)
 
-[node name="Player" parent="." unique_id=2059546600 instance=ExtResource("4_q2mww")]
-position = Vector2(-112, -6)
+[node name="Fline Mine" parent="." unique_id=202463446 instance=ExtResource("4_b405d")]
+position = Vector2(43, -36)
+thrusterRotateSpeed = -1.5
 
-[node name="Flying Enemy" parent="." unique_id=1179070169 groups=["Enemy"] instance=ExtResource("3_tseap")]
-position = Vector2(122, -95)
-idleSpeed = 200.0
-attackSpeed = 80.0
-attackCooldownMax = 5.0
-canAttackColor = Color(0, 1, 0, 1)
-cantAttackColor = Color(1, 0, 0, 0.5)
-contactDamage = 1.0
-maxHP = 10
-
-[node name="Ceiling Enemy" parent="." unique_id=286744557 instance=ExtResource("5_fs0qc")]
-position = Vector2(-118, -54)
-attackSpeed = 1.0
-attackCooldownMax = 10.0
-
-[node name="Shooting Enemy" parent="." unique_id=1082487563 groups=["Enemy"] instance=ExtResource("6_53l5r")]
-position = Vector2(77, -76)
-angleOffsetRad = 3.142
+[node name="Scrubot" parent="." unique_id=1766134704 instance=ExtResource("6_pvio2")]
+position = Vector2(5, 15)
+turnOnPlayer = true
+attackSpeed = 4.0
 attackCooldownMax = 2.0
 
-[node name="Jumping Enemy" parent="." unique_id=1226206699 groups=["Enemy"] instance=ExtResource("1_t8efy")]
-position = Vector2(12, 8)
-mass = 0.1
-gravity_scale = 0.01
-walkSpeed = 20.0
+[node name="Grabber" parent="." unique_id=118655659 instance=ExtResource("6_t8efy")]
+position = Vector2(-55, -70)
+
+[node name="Tankle" parent="." unique_id=1195821909 instance=ExtResource("5_j24i1")]
+position = Vector2(-122, 21)

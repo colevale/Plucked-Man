@@ -1,0 +1,335 @@
+[gd_scene format=3 uid="uid://d06ef46xjkix6"]
+
+[ext_resource type="PackedScene" uid="uid://blc5ag1eshpmt" path="res://Scenes/Enemies/Basic Enemy.tscn" id="1_rd7d0"]
+[ext_resource type="Script" uid="uid://clan3ybkj78ra" path="res://Scripts/Enemies/Ceiling Grabber Enemy.gd" id="2_8svee"]
+[ext_resource type="Shader" uid="uid://bwnwf4ovj11kg" path="res://Shaders/Searchlight.tres" id="2_hogjj"]
+[ext_resource type="Texture2D" uid="uid://behig4ywdgxra" path="res://Art/Sprites/Tiles/Tile 1.png" id="4_35auc"]
+[ext_resource type="Texture2D" uid="uid://cssf8th81hsec" path="res://Art/Sprites/Enemies/Chain.png" id="5_bmkc4"]
+[ext_resource type="Texture2D" uid="uid://efipkjowuds5" path="res://Art/Sprites/Enemies/Lightning 1.png" id="5_w5fvl"]
+[ext_resource type="Shader" uid="uid://0jvh2d17swy1" path="res://Shaders/Grabber Chain.tres" id="5_wmka4"]
+[ext_resource type="Texture2D" uid="uid://cam6m1jmjmmjl" path="res://Art/Sprites/Enemies/Grabber.png" id="6_6ftck"]
+[ext_resource type="Texture2D" uid="uid://bn48w5s5e46hy" path="res://Art/Sprites/Enemies/Lightning 2.png" id="6_sdjmr"]
+[ext_resource type="Texture2D" uid="uid://n1ckvixc3s5l" path="res://Art/Sprites/Enemies/Lightning 3.png" id="7_6ftck"]
+[ext_resource type="Texture2D" uid="uid://kwfusxd2sume" path="res://Art/Sprites/Enemies/Lightning 4.png" id="8_gje5n"]
+[ext_resource type="Shader" uid="uid://coc1xq37aslx8" path="res://Shaders/Grabber Lightning.tres" id="8_w5fvl"]
+[ext_resource type="Texture2D" uid="uid://cc12jh3ajljfq" path="res://Art/Sprites/Enemies/Treads.png" id="17_6ftck"]
+[ext_resource type="Texture2D" uid="uid://bu4t56fo04lq5" path="res://Art/Sprites/Enemies/Bot Eyes.png" id="17_sdjmr"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yf5fn"]
+size = Vector2(28, 12)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lx01h"]
+resource_local_to_scene = true
+shader = ExtResource("2_hogjj")
+shader_parameter/Color = Color(0.113725, 1, 0.117647, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g4v7s"]
+size = Vector2(32, 16)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bmkc4"]
+resource_local_to_scene = true
+shader = ExtResource("5_wmka4")
+shader_parameter/Frame_UV = Vector2(0, 0)
+shader_parameter/Grabber_UV = Vector2(0, 0)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_g4v7s"]
+shader = ExtResource("8_w5fvl")
+shader_parameter/Curve = 0.3
+shader_parameter/Min_Alpha = 0.3
+
+[sub_resource type="Animation" id="Animation_w5fvl"]
+resource_name = "Lightning Scroll 1"
+length = 4.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Lighting 1:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2, 3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("5_w5fvl"), ExtResource("6_sdjmr"), ExtResource("7_6ftck"), ExtResource("8_gje5n")]
+}
+
+[sub_resource type="Animation" id="Animation_6ftck"]
+resource_name = "Lightning Scroll 2"
+length = 4.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Lighting 2:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 1.9999999, 3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("5_w5fvl"), ExtResource("6_sdjmr"), ExtResource("7_6ftck"), ExtResource("8_gje5n")]
+}
+
+[sub_resource type="Animation" id="Animation_gje5n"]
+resource_name = "Lightning Scroll 3"
+length = 4.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Lighting 3:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2, 3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("5_w5fvl"), ExtResource("6_sdjmr"), ExtResource("7_6ftck"), ExtResource("8_gje5n")]
+}
+
+[sub_resource type="Animation" id="Animation_sdjmr"]
+length = 0.001
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6ftck"]
+_data = {
+&"Lightning Scroll 1": SubResource("Animation_w5fvl"),
+&"Lightning Scroll 2": SubResource("Animation_6ftck"),
+&"Lightning Scroll 3": SubResource("Animation_gje5n"),
+&"RESET": SubResource("Animation_sdjmr")
+}
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6ftck"]
+shader = ExtResource("8_w5fvl")
+shader_parameter/Curve = 0.3
+shader_parameter/Min_Alpha = 0.2
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gje5n"]
+shader = ExtResource("8_w5fvl")
+shader_parameter/Curve = 0.3
+shader_parameter/Min_Alpha = 0.1
+
+[sub_resource type="Animation" id="Animation_ffv6g"]
+resource_name = "Frame Bob"
+length = 4.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Frame:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2, 3, 4),
+"transitions": PackedFloat32Array(1000000, 1000000, 1000000, 1000000, 1000000),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 0.5), Vector2(0, 0), Vector2(0, -0.5), Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_8hkfm"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Frame:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_4nt2f"]
+_data = {
+&"Frame Bob": SubResource("Animation_ffv6g"),
+&"RESET": SubResource("Animation_8hkfm")
+}
+
+[sub_resource type="Animation" id="Animation_lx01h"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Treads:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_pfk8i"]
+resource_name = "Treads"
+length = 4.0
+loop_mode = 1
+step = 1.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Treads:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2, 3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_13gyy"]
+_data = {
+&"RESET": SubResource("Animation_lx01h"),
+&"Treads": SubResource("Animation_pfk8i")
+}
+
+[node name="Grabber" unique_id=118655659 instance=ExtResource("1_rd7d0")]
+script = ExtResource("2_8svee")
+grabberBobSpeed = Vector2(1, 1.2)
+grabberBobAmplitude = Vector2(10, 8)
+trapAttackTimerMax = 0.5
+trapDamage = 1
+walkSpeed = 10.0
+startDirection = 1.0
+customSearchlightBehavior = true
+turnOnPlayer = true
+eyesNeutralPos = Vector2(0.5, 1)
+eyesSidePos = Vector2(4, 0)
+
+[node name="CollisionShape2D" parent="." index="0" unique_id=271179105]
+position = Vector2(0, 9)
+shape = SubResource("RectangleShape2D_yf5fn")
+
+[node name="Rays" parent="." index="1" unique_id=291469396]
+position = Vector2(0, 3)
+
+[node name="Search Ray" parent="Rays" index="0" unique_id=274638612]
+position = Vector2(0, 6)
+target_position = Vector2(0, 60)
+
+[node name="Horizontal Ray" type="RayCast2D" parent="Rays" index="1" unique_id=490659924]
+position = Vector2(0, 6)
+target_position = Vector2(18, 0)
+
+[node name="Left Vertical Ray" type="RayCast2D" parent="Rays" index="2" unique_id=542555814]
+position = Vector2(-11, 0)
+target_position = Vector2(0, -10)
+
+[node name="Right Vertical Ray" type="RayCast2D" parent="Rays" index="3" unique_id=1195641918]
+position = Vector2(11, 0)
+target_position = Vector2(0, -10)
+
+[node name="Searchlight" parent="." index="2" unique_id=229370074]
+material = SubResource("ShaderMaterial_lx01h")
+position = Vector2(0, 9)
+
+[node name="Contact Hitbox" parent="." index="3" unique_id=2025154701]
+position = Vector2(0, 9)
+
+[node name="CollisionShape2D" parent="Contact Hitbox" index="0" unique_id=194725216]
+position = Vector2(0, 0)
+shape = SubResource("RectangleShape2D_g4v7s")
+
+[node name="Sprites" type="Node2D" parent="." index="4" unique_id=343509021]
+position = Vector2(0, 10)
+
+[node name="Chain" type="Sprite2D" parent="Sprites" index="0" unique_id=395024776]
+z_index = -1
+texture_filter = 1
+material = SubResource("ShaderMaterial_bmkc4")
+position = Vector2(0, -19)
+texture = ExtResource("5_bmkc4")
+
+[node name="Magnet" type="Sprite2D" parent="Sprites" index="1" unique_id=1791557549]
+texture_filter = 1
+position = Vector2(0, 26)
+texture = ExtResource("6_6ftck")
+vframes = 3
+frame = 2
+
+[node name="Lightning Mask" type="Sprite2D" parent="Sprites/Magnet" index="0" unique_id=1958502375]
+show_behind_parent = true
+clip_children = 1
+texture_filter = 1
+position = Vector2(0, 4)
+scale = Vector2(0.313, 0.313)
+texture = ExtResource("4_35auc")
+
+[node name="Lighting 1" type="Sprite2D" parent="Sprites/Magnet/Lightning Mask" index="0" unique_id=1247902008]
+material = SubResource("ShaderMaterial_g4v7s")
+position = Vector2(0.024893034, -6.364888)
+scale = Vector2(3.198, 3.198)
+texture = ExtResource("5_w5fvl")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprites/Magnet/Lightning Mask/Lighting 1" index="0" unique_id=2109287572]
+root_node = NodePath("../..")
+libraries/ = SubResource("AnimationLibrary_6ftck")
+autoplay = &"Lightning Scroll 1"
+speed_scale = 13.0
+
+[node name="Lighting 2" type="Sprite2D" parent="Sprites/Magnet/Lightning Mask" index="1" unique_id=899779231]
+material = SubResource("ShaderMaterial_6ftck")
+position = Vector2(0.024893034, -3.1700003)
+scale = Vector2(3.198, 3.198)
+texture = ExtResource("5_w5fvl")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprites/Magnet/Lightning Mask/Lighting 2" index="0" unique_id=1205647955]
+root_node = NodePath("../..")
+libraries/ = SubResource("AnimationLibrary_6ftck")
+autoplay = &"Lightning Scroll 2"
+speed_scale = -11.0
+
+[node name="Lighting 3" type="Sprite2D" parent="Sprites/Magnet/Lightning Mask" index="2" unique_id=609036678]
+material = SubResource("ShaderMaterial_gje5n")
+position = Vector2(0.024893034, 0.024888515)
+scale = Vector2(3.198, 3.198)
+texture = ExtResource("5_w5fvl")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprites/Magnet/Lightning Mask/Lighting 3" index="0" unique_id=146346087]
+root_node = NodePath("../..")
+libraries/ = SubResource("AnimationLibrary_6ftck")
+autoplay = &"Lightning Scroll 3"
+speed_scale = 9.0
+
+[node name="Chain Connection" type="Node2D" parent="Sprites/Magnet" index="1" unique_id=119280087]
+position = Vector2(0, -6)
+
+[node name="Treads" type="Sprite2D" parent="Sprites" index="2" unique_id=138556327]
+position = Vector2(0, -7)
+scale = Vector2(-1, 1)
+texture = ExtResource("17_6ftck")
+vframes = 4
+
+[node name="Frame" type="Sprite2D" parent="Sprites" index="3" unique_id=663228023]
+texture_filter = 1
+texture = ExtResource("6_6ftck")
+vframes = 3
+
+[node name="Eye Frame" type="Sprite2D" parent="Sprites/Frame" index="0" unique_id=1216718974]
+clip_children = 2
+texture_filter = 1
+texture = ExtResource("6_6ftck")
+vframes = 3
+frame = 1
+
+[node name="Eyes" type="Sprite2D" parent="Sprites/Frame/Eye Frame" index="0" unique_id=293192303]
+self_modulate = Color(0.9254902, 0.78431374, 0.18039216, 1)
+position = Vector2(0, -1)
+texture = ExtResource("17_sdjmr")
+hframes = 4
+vframes = 4
+
+[node name="Frame Bob Anim" type="AnimationPlayer" parent="Sprites" index="4" unique_id=811882217]
+libraries/ = SubResource("AnimationLibrary_4nt2f")
+autoplay = &"Frame Bob"
+speed_scale = 4.0
+
+[node name="Treads Anim" type="AnimationPlayer" parent="Sprites" index="5" unique_id=504438469]
+libraries/ = SubResource("AnimationLibrary_13gyy")
+autoplay = &"Treads"
+speed_scale = 4.0
+
+[node name="Camera2D" type="Camera2D" parent="." index="5" unique_id=1706242600]

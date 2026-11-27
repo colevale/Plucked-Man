@@ -127,8 +127,9 @@ func remove_player():
 
 # Function on picking up pluckman
 func _on_pickup_area_body_entered(body: Node2D) -> void:
-	if body.is_in_group("Player") and player == null:
-		if pluckman_state == State.IDLE and body.addMorePluckman(): # Checks if the pluckman not following and if the array is the right size (should probably change to a get variable)
+	# Checks if it's player (can probably be better than this)
+	if body.is_in_group("Player"):
+		if pluckman_state != State.FOLLOWING and body.pluckmanArray.size() < 3: # Checks if the pluckman not following and if the array is the right size (should probably change to a get variable)
 			# Turns on physics collider, adds the pluckman, turns off pickup collider (a little redundant but can be changed later)
 			player = body
 			change_state(1)
