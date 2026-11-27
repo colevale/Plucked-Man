@@ -1,0 +1,47 @@
+[gd_scene format=3 uid="uid://cclg2aqoigr26"]
+
+[ext_resource type="Script" uid="uid://ljpihfou0rmy" path="res://Scripts/Player Objects/Player.gd" id="1_nuuxw"]
+[ext_resource type="Texture2D" uid="uid://bce2yt2p4vqul" path="res://Art/Sprites/Placeholders/Player Placeholder.png" id="1_px1qj"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_g4v7s"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_px1qj")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_yf5fn"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_57qmd"]
+radius = 9.0
+height = 26.0
+
+[node name="Player" type="CharacterBody2D" unique_id=860349107 groups=["Player"]]
+collision_layer = 2057
+script = ExtResource("1_nuuxw")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=64589258]
+position = Vector2(0, -16)
+sprite_frames = SubResource("SpriteFrames_g4v7s")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2016467674]
+position = Vector2(0, -10)
+shape = SubResource("CircleShape2D_yf5fn")
+
+[node name="RoomDetector" type="Area2D" parent="." unique_id=485482395]
+position = Vector2(0, -14)
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RoomDetector" unique_id=807718335]
+position = Vector2(0, 1)
+shape = SubResource("CapsuleShape2D_57qmd")
+
+[node name="ThrowPoint" type="Marker2D" parent="." unique_id=1768378185]
+position = Vector2(0, -36)
+
+[connection signal="area_entered" from="RoomDetector" to="." method="_on_room_detector_area_entered"]

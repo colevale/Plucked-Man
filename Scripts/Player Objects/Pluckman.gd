@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 # States Pluckman can be in
-enum State { IDLE, FOLLOWING, THROWN }
+enum State { IDLE, FOLLOWING, THROWN, CONTROL}
 
 # Collision Variables
 @onready var physicsCollider: CollisionShape2D = $CollisionShape2D
@@ -13,25 +13,50 @@ enum State { IDLE, FOLLOWING, THROWN }
 @export var jump_velocity: float = -400.0
 @export var jump_threshold: float = 50.0
 
+var player: Node2D
+var playerGrounded: bool = true
+
 #Throwing Variables
 @export var friction: float = 1200.0
 
 var targetPos: Vector2
 var isThrown: bool = false
+var controlable: bool = false
+
+#Controlling Variables
+@export var spriteRadius: float = 24.0
+@export var moveAreaRadius: float = 200.0
+
+var clickPos: Vector2
+var clicked: bool = false
+var move: bool = false
 
 func _ready():
 	#Turns off physics collider and sets the target position to where it is on spawn
-	physicsCollider.set_deferred("disabled", true)
-	targetPos = global_position
+	change_state(0)
 
 func _physics_process(delta: float) -> void:
 	# Changes what to do depending on state (For idle currently nothing but can be changed if we add pluckman spawners)
-	if pluckman_state == State.FOLLOWING:
+	if pluckman_state == State.IDLE:
+		idle_command(delta)
+	elif pluckman_state == State.FOLLOWING:
 		following_commands(delta)
 	elif pluckman_state == State.THROWN:
 		throwing_commands(delta)
+	elif pluckman_state == State.CONTROL:
+		control_commands(delta)
+	
+	if not is_on_floor():
+		velocity += get_gravity() * delta
 	
 	move_and_slide()
+
+# Save for later if we want to do draggables
+func _input(event):
+	pass
+
+func idle_command(delta: float):
+	pass
 
 #If State = 1
 func following_commands(delta: float):
@@ -45,26 +70,41 @@ func following_commands(delta: float):
 		velocity.x = move_toward(velocity.x, 0, follow_speed)
 	
 	# Checks if it is on the floor and player is above a certain height
-	if is_on_floor() and (global_position.y - targetPos.y) > jump_threshold:
+	if is_on_floor() and abs(global_position.y - targetPos.y) > jump_threshold and !playerGrounded:
 		velocity.y = jump_velocity
-	
-	# Gravity function
-	if not is_on_floor():
-		velocity += get_gravity() * delta
 
 #If State = 2
 func throwing_commands(delta: float):
-	# If not on the floor use gravity
-	if not is_on_floor():
-		velocity += get_gravity() * delta
-	elif is_on_floor():
+	if is_on_floor():
 		# If on the floor (need to potentially update becuase having issues reading before moving to target on player//Reading as on floor before throw even occurs)
 		velocity.x = move_toward(velocity.x, 0, friction * delta) # Adds friction to throw
 		isThrown = false # Changes throw bool
 		if velocity == Vector2.ZERO: # Sets back to idle when it stops moving // If we add a state for when it can be commanded should go here
-			change_state(0)
-			physicsCollider.set_deferred("disabled", true)
-			pickupCollider.set_deferred("disabled", false)
+			change_state(3)
+			controlable = true
+
+func control_commands(delta: float):
+	if controlable == true:
+		if Input.is_action_just_pressed("click"):
+			clickPos = get_global_mouse_position()
+			if not clicked:
+				if position.distance_to(clickPos) < spriteRadius:
+					clicked = true
+			elif clicked:
+				if position.distance_to(clickPos) < moveAreaRadius:
+					move = true
+				clicked = false
+		
+		if move == true:
+			var distance = clickPos.x - global_position.x
+			if abs(distance) <= follow_speed * delta:
+				velocity.x = 0.0
+				global_position.x = clickPos.x
+				move = false
+			else:
+				velocity.x = sign(distance) * follow_speed
+		else:
+			velocity.x = 0
 
 # Function for throwing 
 func throw(throwVelocity: Vector2) -> void:
@@ -72,22 +112,18 @@ func throw(throwVelocity: Vector2) -> void:
 	isThrown = true
 
 func change_state(index: int):
-	#Test code for later
-	
-	#match index:
-		#0:
-			#physicsCollider.set_deferred("disabled", true)
-			#pickupCollider.set_deferred("disabled", false)
-		#1:
-			#physicsCollider.set_deferred("disabled", false)
-			#pickupCollider.set_deferred("disabled", true)
-		#2:
-			#physicsCollider.set_deferred("disabled", false)
-			#pickupCollider.set_deferred("disabled", true)
-		#_:
-			#print("error: not a state")
-	
 	pluckman_state = index
+
+func change_playerGrounded(state: bool):
+	playerGrounded = state
+	
+func die():
+	if player != null:
+		player.remove_pluckman(self)
+	queue_free()
+
+func remove_player():
+	player = null
 
 # Function on picking up pluckman
 func _on_pickup_area_body_entered(body: Node2D) -> void:
@@ -95,7 +131,6 @@ func _on_pickup_area_body_entered(body: Node2D) -> void:
 	if body.is_in_group("Player"):
 		if pluckman_state != State.FOLLOWING and body.pluckmanArray.size() < 3: # Checks if the pluckman not following and if the array is the right size (should probably change to a get variable)
 			# Turns on physics collider, adds the pluckman, turns off pickup collider (a little redundant but can be changed later)
-			physicsCollider.set_deferred("disabled", false)
-			pluckman_state = State.FOLLOWING
-			body.add_pluckman(self)
-			pickupCollider.set_deferred("disabled", true)
+			player = body
+			change_state(1)
+			player.add_pluckman(self)

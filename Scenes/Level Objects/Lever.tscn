@@ -1,0 +1,34 @@
+[gd_scene format=3 uid="uid://bifg0kc2q2r0o"]
+
+[ext_resource type="Script" uid="uid://cfearn474kjop" path="res://Scripts/Level Objects/Lever.gd" id="1_81bjl"]
+[ext_resource type="Texture2D" uid="uid://bcv132hxeq5v7" path="res://Art/Sprites/Placeholders/Lever.png" id="1_e5jd7"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_yf5fn"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_e5jd7")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_57qmd"]
+radius = 61.400326
+
+[node name="Lever" type="Node2D" unique_id=1844499029]
+script = ExtResource("1_81bjl")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1050001923]
+position = Vector2(0, -16)
+sprite_frames = SubResource("SpriteFrames_yf5fn")
+
+[node name="FlipDistance" type="Area2D" parent="." unique_id=1159270468]
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FlipDistance" unique_id=1477478646]
+shape = SubResource("CircleShape2D_57qmd")
+
+[connection signal="body_entered" from="FlipDistance" to="." method="_on_flip_distance_body_entered"]
+[connection signal="body_exited" from="FlipDistance" to="." method="_on_flip_distance_body_exited"]
