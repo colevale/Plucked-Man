@@ -137,19 +137,19 @@ func addMorePluckman():
 	else:
 		return false
 
-func die():
+func _onDeath():
 	# try to find a way to set reference pluckmen back to idle and to remove the player reference
-	
-	if pluckmanArray.size() > 0:
-		for i in range(pluckmanArray.size()):
-			pluckmanArray[i].change_state(0)
-			pluckmanArray[i].remove_player()
-	elif thrownPluckmen.size() > 0:
-		for i in range(thrownPluckmen.size()):
-			thrownPluckmen[i].change_state(0)
-			thrownPluckmen[i].remove_player()
-	
-	queue_free()
+	if deletaOnDeath:
+		if pluckmanArray.size() > 0:
+			for i in range(pluckmanArray.size()):
+				pluckmanArray[i].change_state(0)
+				pluckmanArray[i].remove_player()
+		elif thrownPluckmen.size() > 0:
+			for i in range(thrownPluckmen.size()):
+				thrownPluckmen[i].change_state(0)
+				thrownPluckmen[i].remove_player()
+		
+		queue_free()
 
 # OPTIONAL if camera will always be in final game just set it as an onready instead
 func get_camera(currCamera: Node2D) -> void:
