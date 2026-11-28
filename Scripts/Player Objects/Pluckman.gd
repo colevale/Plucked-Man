@@ -1,4 +1,5 @@
-extends CharacterBody2D
+class_name Pluckman
+extends Entity
 
 # States Pluckman can be in
 enum State { IDLE, FOLLOWING, THROWN, CONTROL}
@@ -117,12 +118,13 @@ func change_state(index: int):
 func change_playerGrounded(state: bool):
 	playerGrounded = state
 	
-func die():
+func _onDeath():
 	if player != null:
 		player.remove_pluckman(self)
 	queue_free()
 
 func remove_player():
+	velocity = Vector2.ZERO
 	player = null
 
 # Function on picking up pluckman

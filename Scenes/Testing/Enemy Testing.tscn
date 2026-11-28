@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://br5ujcjm6x6v5" path="res://Scenes/Enemies/Tankle.tscn" id="5_j24i1"]
 [ext_resource type="PackedScene" uid="uid://c174nq0003hbp" path="res://Scenes/Enemies/Scrubot.tscn" id="6_pvio2"]
 [ext_resource type="PackedScene" uid="uid://d06ef46xjkix6" path="res://Scenes/Enemies/Grabber.tscn" id="6_t8efy"]
+[ext_resource type="PackedScene" uid="uid://cc7quy4p36hry" path="res://Scenes/Level Objects/Pluckman Spawner.tscn" id="7_tseap"]
 
 [node name="EnemyTesting" type="Node2D" unique_id=607693179]
 
@@ -62,3 +63,6 @@ position = Vector2(-55, -70)
 
 [node name="Tankle" parent="." unique_id=1195821909 instance=ExtResource("5_j24i1")]
 position = Vector2(-122, 21)
+
+[node name="Pluckman Spawner" parent="." unique_id=1331374000 instance=ExtResource("7_tseap")]
+position = Vector2(-25, -16)

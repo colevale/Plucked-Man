@@ -25,8 +25,9 @@ radius = 144.03125
 
 [node name="Pluckman" type="CharacterBody2D" unique_id=581896398 groups=["Minion"]]
 collision_layer = 2056
-collision_mask = 128
+collision_mask = 9
 script = ExtResource("1_e8lqk")
+maxHP = 3
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=601264830]
 position = Vector2(0, -13)

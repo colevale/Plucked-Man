@@ -11,7 +11,7 @@ func _on_body_entered(body: Node2D) -> void:
 
 
 func playerDeath(body: Node2D):
-	body.die()
+	body._onDeath()
 	
 func minionDeath(body: Node2D):
-	body.die()
+	body._onDeath()

@@ -137,6 +137,9 @@ func _on_contact_hitbox_body_entered(body: Node2D) -> void:
 	if body.is_in_group("Player") :
 		body._updateHP(contactDamage)
 		
+	if body.is_in_group("Minion") :
+		print("enemy working")
+		body._updateHP(contactDamage)
 
 #Taking damage____________________________________________________________________
 func _updateHP(dir : int):

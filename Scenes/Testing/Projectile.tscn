@@ -8,6 +8,8 @@ radius = 4.0
 
 [node name="Projectile" type="Area2D" unique_id=1940531558]
 texture_filter = 1
+collision_layer = 9
+collision_mask = 9
 script = ExtResource("2_y0kec")
 speed = 40.0
 
